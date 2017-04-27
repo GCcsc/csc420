@@ -50,4 +50,13 @@ public class UserStore implements Serializable {
         }
         return null;
     }
+    public boolean remove(int userId){
+        for (TwitterUser user : store){
+            if(user.getId() == userId){
+                store.remove(user);
+                return true;
+            }
+        }
+        return false;
+    }
 }
