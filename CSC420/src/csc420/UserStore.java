@@ -23,6 +23,7 @@
  */
 package csc420;
 
+import csc420.models.TwitterUser;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -30,18 +31,23 @@ import java.util.ArrayList;
  *
  * @author Cameron Everett, Chase Toy, Laura Buckman
  */
-public class UserStore<T> implements Serializable {
-    ArrayList<T> store;
+public class UserStore implements Serializable {
+    ArrayList<TwitterUser> store;
     public UserStore() {
        store = new ArrayList<>();
     }
-    public void add(T item){
+    public void add(TwitterUser item){
         store.add(item);
     }
     public int getLength(){
         return store.size();
     }
-    public T find(int userId){
+    public TwitterUser find(int userId){
+        for(TwitterUser user : store) {
+            if(user.getId() == userId) {
+                return user;
+            }
+        }
         return null;
-    } 
+    }
 }
