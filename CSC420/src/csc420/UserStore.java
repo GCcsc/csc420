@@ -25,16 +25,17 @@ package csc420;
 
 import csc420.models.TwitterUser;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.TreeSet;
 
 /**
  *
  * @author Cameron Everett, Chase Toy, Laura Buckman
+ * Stores user entries for application.
  */
 public class UserStore implements Serializable {
-    ArrayList<TwitterUser> store;
+    TreeSet<TwitterUser> store;
     public UserStore() {
-       store = new ArrayList<>();
+       store = new TreeSet<>();
     }
     public void add(TwitterUser item){
         store.add(item);
