@@ -23,15 +23,16 @@
  */
 package csc420;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author Cameron Everett, Chase Toy, Laura Buckman
  */
-public class UserStore<T> {
+public class UserStore<T> implements Serializable {
     ArrayList<T> store;
     public UserStore() {
-       store = new ArrayList<T>();
+       store = new ArrayList<>();
     }
 }
