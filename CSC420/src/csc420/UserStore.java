@@ -35,4 +35,13 @@ public class UserStore<T> implements Serializable {
     public UserStore() {
        store = new ArrayList<>();
     }
+    public void add(T item){
+        store.add(item);
+    }
+    public int getLength(){
+        return store.size();
+    }
+    public T find(int userId){
+        return null;
+    } 
 }
