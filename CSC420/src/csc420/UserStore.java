@@ -40,7 +40,7 @@ public class UserStore implements Serializable {
     public void add(TwitterUser item){
         store.add(item);
     }
-    public int getLength(){
+    public int getSize(){
         return store.size();
     }
     public TwitterUser find(int userId){
