@@ -22,7 +22,11 @@
  * THE SOFTWARE.
  */
 package csc420.twitterapi;
+import java.util.Enumeration;
+import java.util.ResourceBundle;
 import twitter4j.Twitter;
+import twitter4j.TwitterFactory;
+import twitter4j.conf.ConfigurationBuilder;
 
 /**
  *
@@ -31,8 +35,20 @@ import twitter4j.Twitter;
  * Responsible for creating connection to Twitter API.
  */
 public class TwitterAPI {
+    Twitter twitter;
     public TwitterAPI() {
+        ResourceBundle twitterProps = ResourceBundle.getBundle("resources.twitter4j");
+        Enumeration<String> it = twitterProps.getKeys();
         
+        ConfigurationBuilder configBuilder = new ConfigurationBuilder();
+        configBuilder.setDebugEnabled(true);
+        configBuilder.setOAuthConsumerKey(twitterProps.getString(TwitterOAuthProps.CONSUMER_KEY));
+        configBuilder.setOAuthConsumerSecret(twitterProps.getString(TwitterOAuthProps.CONSUMER_SECRET));
+        configBuilder.setOAuthAccessToken(twitterProps.getString(TwitterOAuthProps.ACCESS_TOKEN));
+        configBuilder.setOAuthAccessToken(twitterProps.getString(TwitterOAuthProps.ACCESS_TOKEN_SECRET));
+        
+        TwitterFactory twitterFactory = new TwitterFactory(configBuilder.build());
+        twitter = twitterFactory.getInstance();
     }
     
 }

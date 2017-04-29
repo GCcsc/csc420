@@ -23,11 +23,14 @@
  */
 package csc420;
 
+import csc420.twitterapi.TwitterAPI;
+
 /**
  *
  * @author Laura Hunt, Chase Toy, Cameron Everett
  */
 public class Main {
     public static void main(String[] args) {
+        TwitterAPI api = new TwitterAPI();
     }
 }
