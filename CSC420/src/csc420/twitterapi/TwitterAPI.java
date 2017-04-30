@@ -24,6 +24,7 @@
 package csc420.twitterapi;
 import csc420.models.TwitterUser;
 import java.util.ResourceBundle;
+import twitter4j.IDs;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
@@ -50,12 +51,16 @@ public class TwitterAPI {
                 twitterProps.getString(TwitterOAuthProps.ACCESS_TOKEN),
                 twitterProps.getString(TwitterOAuthProps.ACCESS_TOKEN_SECRET)
         ));
-
-        User user = twitter.showUser("mpjme");
-        long userId = user.getId();
-        System.out.println("mpjme: " + userId);
-        System.out.println(user.getFollowersCount());
-
+    }
+    
+    public TwitterUser getById(long id) throws TwitterException {
+        User user = twitter.showUser(id);
+        return new TwitterUser(
+                user.getId(),
+                user.getName(),
+                user.getFollowersCount(),
+                user.getProfileImageURL()
+        );
     }
     
     public TwitterUser getByUsername(String username) throws TwitterException {

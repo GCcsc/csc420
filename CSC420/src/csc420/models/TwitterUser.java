@@ -30,13 +30,13 @@ package csc420.models;
 public class TwitterUser {
     private String handle;
     private long id;
-    private int followers;
+    private int followersCount;
     private String profileImageUrl;
     
-    public TwitterUser(long id, String handle, int followers, String profileImageUrl) {
+    public TwitterUser(long id, String handle, int followersCount, String profileImageUrl) {
         this.id = id;
         this.handle = handle;
-        this.followers = followers;
+        this.followersCount = followersCount;
         this.profileImageUrl = profileImageUrl;
     }
     
@@ -47,8 +47,8 @@ public class TwitterUser {
         return handle;
     }
     
-    public int getFollowers() {
-        return followers;
+    public int getFollowersCount() {
+        return followersCount;
     }
     
     public String getProfileImageUrl() {

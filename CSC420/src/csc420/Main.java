@@ -24,6 +24,7 @@
 package csc420;
 
 import csc420.twitterapi.TwitterAPI;
+import csc420.models.TwitterUser;
 import twitter4j.TwitterException;
 
 /**
@@ -33,9 +34,11 @@ import twitter4j.TwitterException;
 public class Main {
     public static void main(String[] args) {
         try {
-            TwitterAPI api = new TwitterAPI();
+            TwitterAPI twitterApi = new TwitterAPI();
+            TwitterUser testUser = twitterApi.getByUsername("java");
+            System.out.println(testUser.getHandle());
         } catch(TwitterException e) {
-            // TODO failed initialization of TwitterAPI.
+            // TODO: Handle failed initialization of TwitterAPI.
             e.printStackTrace();
         }
     }
