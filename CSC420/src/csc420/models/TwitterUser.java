@@ -27,7 +27,7 @@ package csc420.models;
  *
  * @author Cameron Everett, Chase Toy, Laura Buckman
  */
-public class TwitterUser implements Comparable {
+public class TwitterUser implements Comparable<TwitterUser> {
     private String handle;
     private long id;
     private int followersCount;
@@ -73,8 +73,7 @@ public class TwitterUser implements Comparable {
     }
 
     @Override
-    public int compareTo(Object o) {
-        TwitterUser other = (TwitterUser) o;
+    public int compareTo(TwitterUser other) {
         if(this.id < other.getId()) {
             return -1;
         }
