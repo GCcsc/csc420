@@ -29,7 +29,7 @@ package csc420.models;
  */
 public class TwitterUser {
     private String handle;
-    private int id;
+    private long id;
     private int followers;
     private int following;
     
@@ -39,7 +39,7 @@ public class TwitterUser {
         this.following = following;
     }
     
-    public int getId() {
+    public long getId() {
         return id;
     }
     public String getHandle() {
