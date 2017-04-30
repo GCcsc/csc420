@@ -22,6 +22,7 @@
  * THE SOFTWARE.
  */
 package csc420.twitterapi;
+import csc420.models.TwitterUser;
 import java.util.ResourceBundle;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -55,6 +56,16 @@ public class TwitterAPI {
         System.out.println("mpjme: " + userId);
         System.out.println(user.getFollowersCount());
 
+    }
+    
+    public TwitterUser getByUsername(String username) throws TwitterException {
+        User user = twitter.showUser(username);
+        return new TwitterUser(
+                user.getId(),
+                user.getName(),
+                user.getFollowersCount(),
+                user.getProfileImageURL()
+        );
     }
     
 }

@@ -31,12 +31,13 @@ public class TwitterUser {
     private String handle;
     private long id;
     private int followers;
-    private int following;
+    private String profileImageUrl;
     
-    public TwitterUser(String handle, int followers, int following) {
+    public TwitterUser(long id, String handle, int followers, String profileImageUrl) {
+        this.id = id;
         this.handle = handle;
         this.followers = followers;
-        this.following = following;
+        this.profileImageUrl = profileImageUrl;
     }
     
     public long getId() {
@@ -50,8 +51,8 @@ public class TwitterUser {
         return followers;
     }
     
-    public int getFollowing() {
-        return following;
+    public String getProfileImageUrl() {
+        return profileImageUrl;
     }
     
 }
