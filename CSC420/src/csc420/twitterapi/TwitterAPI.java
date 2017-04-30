@@ -37,7 +37,7 @@ import twitter4j.auth.AccessToken;
  */
 public class TwitterAPI {
     Twitter twitter;
-    public TwitterAPI() {
+    public TwitterAPI() throws TwitterException {
         ResourceBundle twitterProps = ResourceBundle.getBundle("resources.twitter4j");        
 
         twitter = TwitterFactory.getSingleton();
@@ -49,15 +49,12 @@ public class TwitterAPI {
                 twitterProps.getString(TwitterOAuthProps.ACCESS_TOKEN),
                 twitterProps.getString(TwitterOAuthProps.ACCESS_TOKEN_SECRET)
         ));
-      
-        try {
-            User user = twitter.showUser("mpjme");
-            long userId = user.getId();
-            System.out.println("mpjme: " + userId);
-            System.out.println(user.getFollowersCount());
-        } catch(TwitterException e) {
-            e.printStackTrace();
-        }
+
+        User user = twitter.showUser("mpjme");
+        long userId = user.getId();
+        System.out.println("mpjme: " + userId);
+        System.out.println(user.getFollowersCount());
+
     }
     
 }
