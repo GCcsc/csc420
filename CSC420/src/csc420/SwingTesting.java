@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+package csc420;
 
 import java.awt.Container;
 import java.awt.Font;
@@ -28,8 +29,6 @@ import java.awt.GridLayout;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-
-package csc420;
 
 /**
  *
