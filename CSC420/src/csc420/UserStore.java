@@ -37,8 +37,8 @@ public class UserStore implements Serializable {
     public UserStore() {
        store = new TreeSet<>();
     }
-    public void add(TwitterUser item){
-        store.add(item);
+    public void add(TwitterUser twitterUser){
+        store.add(twitterUser);
     }
     public int getSize(){
         return store.size();
@@ -59,5 +59,9 @@ public class UserStore implements Serializable {
             }
         }
         return false;
+    }
+    
+    public void clear() {
+        store.clear();
     }
 }
