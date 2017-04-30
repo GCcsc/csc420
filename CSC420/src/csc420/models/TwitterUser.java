@@ -27,7 +27,7 @@ package csc420.models;
  *
  * @author Cameron Everett, Chase Toy, Laura Buckman
  */
-public class TwitterUser {
+public class TwitterUser implements Comparable {
     private String handle;
     private long id;
     private int followersCount;
@@ -70,6 +70,20 @@ public class TwitterUser {
      */
     public String getProfileImageUrl() {
         return profileImageUrl;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        TwitterUser other = (TwitterUser) o;
+        if(this.id < other.getId()) {
+            return -1;
+        }
+        else if(this.id == other.getId()) {
+            return 0;
+        }
+        else {
+            return 1;
+        }
     }
     
 }
