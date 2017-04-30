@@ -25,6 +25,7 @@ package csc420;
 
 import csc420.models.TwitterUser;
 import java.io.Serializable;
+import java.util.Set;
 import java.util.TreeSet;
 
 /**
@@ -33,7 +34,7 @@ import java.util.TreeSet;
  * Stores user entries for application.
  */
 public class UserStore implements Serializable {
-    TreeSet<TwitterUser> store;
+    Set<TwitterUser> store;
     public UserStore() {
        store = new TreeSet<>();
     }
@@ -42,7 +43,7 @@ public class UserStore implements Serializable {
      * Add a user to the store.
      * @param twitterUser 
      */
-    public void add(TwitterUser twitterUser){
+    public synchronized void add(TwitterUser twitterUser){
         store.add(twitterUser);
     }
     
@@ -75,7 +76,7 @@ public class UserStore implements Serializable {
      * @param userId
      * @return 
      */
-    public boolean remove(int userId){
+    public synchronized boolean remove(int userId){
         for (TwitterUser user : store){
             if(user.getId() == userId){
                 store.remove(user);
@@ -88,7 +89,7 @@ public class UserStore implements Serializable {
     /**
      * Empties out the twitter user profiles currently in the store.
      */
-    public void clear() {
+    public synchronized void clear() {
         store.clear();
     }
 }
