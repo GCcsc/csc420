@@ -23,11 +23,13 @@
  */
 package csc420.models;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Cameron Everett, Chase Toy, Laura Buckman
  */
-public class TwitterUser implements Comparable<TwitterUser> {
+public class TwitterUser implements Comparable<TwitterUser>, Serializable {
     private String handle;
     private long id;
     private int followersCount;
