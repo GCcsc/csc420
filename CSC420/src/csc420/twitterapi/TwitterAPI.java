@@ -53,8 +53,15 @@ public class TwitterAPI {
         ));
     }
     
-    public TwitterUser getById(long id) throws TwitterException {
-        User user = twitter.showUser(id);
+    /**
+     * Fetch a user's profile information by id from the Twitter API endpoint
+     * and return a new instance of the TwitterUser model.
+     * @param userId
+     * @return TwitterUser
+     * @throws TwitterException 
+     */
+    public TwitterUser getById(long userId) throws TwitterException {
+        User user = twitter.showUser(userId);
         return new TwitterUser(
                 user.getId(),
                 user.getName(),
@@ -63,6 +70,13 @@ public class TwitterAPI {
         );
     }
     
+    /**
+     * Fetch a user's profile information by username from the Twitter API endpoint
+     * and return a new instance of the TwitterUser model.
+     * @param username
+     * @return
+     * @throws TwitterException 
+     */
     public TwitterUser getByUsername(String username) throws TwitterException {
         User user = twitter.showUser(username);
         return new TwitterUser(
@@ -71,6 +85,19 @@ public class TwitterAPI {
                 user.getFollowersCount(),
                 user.getProfileImageURL()
         );
+    }
+    
+    /**
+     * Fetch a user's followers associated with the passed userId and return
+     * a list of user ids from based on the page (cursor) from the Twitter API.
+     * @param userId - Returns followers of the user with the passed userId.
+     * @param cursor - Used for paginating results.
+     * @return
+     * @throws TwitterException 
+     */
+    public long[] getFollowersByUserId(long userId, long cursor) throws TwitterException {
+        // Returns 20 of the selected users followers.
+        return twitter.getFollowersIDs(userId, cursor, 20).getIDs();
     }
     
 }
