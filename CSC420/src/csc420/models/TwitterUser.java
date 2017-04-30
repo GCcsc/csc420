@@ -40,17 +40,34 @@ public class TwitterUser {
         this.profileImageUrl = profileImageUrl;
     }
     
+    /**
+     * Returns twitter id.
+     * @return id
+     */
     public long getId() {
         return id;
     }
+    
+    /**
+     * Returns twitter handle of current user.
+     * @return 
+     */
     public String getHandle() {
         return handle;
     }
     
+    /**
+     * Returns number of followers this user has.
+     * @return 
+     */
     public int getFollowersCount() {
         return followersCount;
     }
     
+    /**
+     * Returns link to user's profile image.
+     * @return 
+     */
     public String getProfileImageUrl() {
         return profileImageUrl;
     }
