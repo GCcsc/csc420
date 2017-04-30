@@ -24,7 +24,6 @@
 package csc420.twitterapi;
 import csc420.models.TwitterUser;
 import java.util.ResourceBundle;
-import twitter4j.IDs;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
@@ -39,6 +38,11 @@ import twitter4j.auth.AccessToken;
  */
 public class TwitterAPI {
     Twitter twitter;
+    
+    /**
+     * Initializes a connection to the Twitter API.
+     * @throws TwitterException 
+     */
     public TwitterAPI() throws TwitterException {
         ResourceBundle twitterProps = ResourceBundle.getBundle("resources.twitter4j");        
 
@@ -74,7 +78,7 @@ public class TwitterAPI {
      * Fetch a user's profile information by username from the Twitter API endpoint
      * and return a new instance of the TwitterUser model.
      * @param username
-     * @return
+     * @return TwitterUser
      * @throws TwitterException 
      */
     public TwitterUser getByUsername(String username) throws TwitterException {
@@ -92,7 +96,7 @@ public class TwitterAPI {
      * a list of user ids from based on the page (cursor) from the Twitter API.
      * @param userId - Returns followers of the user with the passed userId.
      * @param cursor - Used for paginating results.
-     * @return
+     * @return TwitterUser
      * @throws TwitterException 
      */
     public long[] getFollowersByUserId(long userId, long cursor) throws TwitterException {

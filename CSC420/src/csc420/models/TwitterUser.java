@@ -42,7 +42,7 @@ public class TwitterUser {
     
     /**
      * Returns twitter id.
-     * @return id
+     * @return Id of the twitter user's profile.
      */
     public long getId() {
         return id;
@@ -50,7 +50,7 @@ public class TwitterUser {
     
     /**
      * Returns twitter handle of current user.
-     * @return 
+     * @return Display name of the twitter user's profile.
      */
     public String getHandle() {
         return handle;
@@ -58,7 +58,7 @@ public class TwitterUser {
     
     /**
      * Returns number of followers this user has.
-     * @return 
+     * @return Number of users following this profile.
      */
     public int getFollowersCount() {
         return followersCount;
@@ -66,7 +66,7 @@ public class TwitterUser {
     
     /**
      * Returns link to user's profile image.
-     * @return 
+     * @return Link to user's profile image.
      */
     public String getProfileImageUrl() {
         return profileImageUrl;

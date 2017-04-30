@@ -37,12 +37,29 @@ public class UserStore implements Serializable {
     public UserStore() {
        store = new TreeSet<>();
     }
+    
+    /**
+     * Add a user to the store.
+     * @param twitterUser 
+     */
     public void add(TwitterUser twitterUser){
         store.add(twitterUser);
     }
+    
+    /**
+     * Get the number of users in the store.
+     * @return 
+     */
     public int getSize(){
         return store.size();
     }
+    
+    /**
+     * Find a user in the store by the profile id. Returns null if it is not
+     * found within the store.
+     * @param userId
+     * @return TwitterUser on success or null otherwise.
+     */
     public TwitterUser find(int userId){
         for(TwitterUser user : store) {
             if(user.getId() == userId) {
@@ -51,6 +68,13 @@ public class UserStore implements Serializable {
         }
         return null;
     }
+    
+    /**
+     * Remove a user from the store by the profile id. Returns true if a user
+     * was deleted from the store or false otherwise.
+     * @param userId
+     * @return 
+     */
     public boolean remove(int userId){
         for (TwitterUser user : store){
             if(user.getId() == userId){
@@ -61,6 +85,9 @@ public class UserStore implements Serializable {
         return false;
     }
     
+    /**
+     * Empties out the twitter user profiles currently in the store.
+     */
     public void clear() {
         store.clear();
     }

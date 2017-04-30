@@ -40,6 +40,6 @@ public class Main {
         } catch(TwitterException e) {
             // TODO: Handle failed initialization of TwitterAPI.
             e.printStackTrace();
-        }
+        }        
     }
 }
