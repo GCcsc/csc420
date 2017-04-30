@@ -22,11 +22,12 @@
  * THE SOFTWARE.
  */
 package csc420.twitterapi;
-import java.util.Enumeration;
 import java.util.ResourceBundle;
 import twitter4j.Twitter;
+import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
-import twitter4j.conf.ConfigurationBuilder;
+import twitter4j.User;
+import twitter4j.auth.AccessToken;
 
 /**
  *
@@ -37,18 +38,26 @@ import twitter4j.conf.ConfigurationBuilder;
 public class TwitterAPI {
     Twitter twitter;
     public TwitterAPI() {
-        ResourceBundle twitterProps = ResourceBundle.getBundle("resources.twitter4j");
-        Enumeration<String> it = twitterProps.getKeys();
-        
-        ConfigurationBuilder configBuilder = new ConfigurationBuilder();
-        configBuilder.setDebugEnabled(true);
-        configBuilder.setOAuthConsumerKey(twitterProps.getString(TwitterOAuthProps.CONSUMER_KEY));
-        configBuilder.setOAuthConsumerSecret(twitterProps.getString(TwitterOAuthProps.CONSUMER_SECRET));
-        configBuilder.setOAuthAccessToken(twitterProps.getString(TwitterOAuthProps.ACCESS_TOKEN));
-        configBuilder.setOAuthAccessToken(twitterProps.getString(TwitterOAuthProps.ACCESS_TOKEN_SECRET));
-        
-        TwitterFactory twitterFactory = new TwitterFactory(configBuilder.build());
-        twitter = twitterFactory.getInstance();
+        ResourceBundle twitterProps = ResourceBundle.getBundle("resources.twitter4j");        
+
+        twitter = TwitterFactory.getSingleton();
+        twitter.setOAuthConsumer(
+                twitterProps.getString(TwitterOAuthProps.CONSUMER_KEY),
+                twitterProps.getString(TwitterOAuthProps.CONSUMER_SECRET)
+        );
+        twitter.setOAuthAccessToken(new AccessToken(
+                twitterProps.getString(TwitterOAuthProps.ACCESS_TOKEN),
+                twitterProps.getString(TwitterOAuthProps.ACCESS_TOKEN_SECRET)
+        ));
+      
+        try {
+            User user = twitter.showUser("mpjme");
+            long userId = user.getId();
+            System.out.println("mpjme: " + userId);
+            System.out.println(user.getFollowersCount());
+        } catch(TwitterException e) {
+            e.printStackTrace();
+        }
     }
     
 }
