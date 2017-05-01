@@ -23,12 +23,32 @@
  */
 package csc420.gui;
 
+import java.awt.Dimension;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  *
  * @author Cameron J. Everett
  */
 public class UserSearchBar extends JPanel {
+    JLabel fieldLabel;
+    JTextField userTextField;
     
+    public UserSearchBar() {
+        fieldLabel = new JLabel("User: ");
+        userTextField = new JTextField();        
+        initComponents();
+    }
+    
+    private void initComponents() {
+        userTextField.setMaximumSize(new Dimension(200, 20));
+        setAlignmentX(LEFT_ALIGNMENT);
+        setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+        
+        add(fieldLabel);
+        add(userTextField);
+    }
 }
