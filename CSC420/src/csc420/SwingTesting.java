@@ -45,7 +45,7 @@ public class SwingTesting extends JFrame {
     
     public SwingTesting() {
         Container pane = getContentPane();
-        pane.setLayout(new GridLayout(3,2));
+        pane.setLayout(new GridLayout(3,3));
         JButton button = new JButton("First");
         pane.add(button);
         button = new JButton("Second");
