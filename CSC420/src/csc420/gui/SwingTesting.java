@@ -23,6 +23,7 @@
  */
 package csc420.gui;
 
+import java.awt.BorderLayout;
 import javax.swing.JFrame;
 
 /**
@@ -30,13 +31,17 @@ import javax.swing.JFrame;
  * @author chasetoy
  */
 public class SwingTesting extends JFrame {
-    
-    public SwingTesting() {
-        super();
+    LeftSidebar leftSideBar = new LeftSidebar();
+    public SwingTesting(String title) {
+        super(title);
+        
+        initComponents();
     }
     
     private void initComponents() {
-        
+        setLayout(new BorderLayout());
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setBounds(10,10,960,720);
+        this.add(leftSideBar, BorderLayout.WEST);
     }
-    
 }

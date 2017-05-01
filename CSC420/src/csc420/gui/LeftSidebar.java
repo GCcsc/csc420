@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2017 Laura Buckman, Chase Toy, Cameron Everett.
+ * Copyright 2017 cam.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,32 +21,35 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package csc420;
+package csc420.gui;
 
-import csc420.gui.SwingTesting;
-import csc420.twitterapi.TwitterAPI;
-import csc420.models.TwitterUser;
-import java.awt.EventQueue;
-import twitter4j.TwitterException;
+import java.awt.Color;
+import java.awt.Dimension;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  *
- * @author Laura Hunt, Chase Toy, Cameron Everett
+ * @author cam
  */
-public class Main {
-    public static void main(String[] args) {
-/*
-        try {
-            TwitterAPI twitterApi = new TwitterAPI();
-            TwitterUser testUser = twitterApi.getByUsername("java");
-            System.out.println(testUser.getHandle());
-        } catch(TwitterException e) {
-            // TODO: Handle failed initialization of TwitterAPI.
-            e.printStackTrace();
-        }
-*/
-        EventQueue.invokeLater(() -> {
-            new SwingTesting("Testing Testing").setVisible(true); 
-        });
+public class LeftSidebar extends JPanel {
+    JLabel userSearchFieldLabel;
+    JTextField userSearchField;
+    
+    public LeftSidebar() {
+        initComponents();
+    }
+    
+    private void initComponents() {
+        setOpaque(true);
+        setBackground(Color.GREEN);
+        Dimension dim = getPreferredSize();
+        dim.width = 250;
+        setPreferredSize(dim);
+    }
+    
+    private void initUserSearchField() {
+        
     }
 }
