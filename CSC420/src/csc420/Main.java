@@ -24,10 +24,7 @@
 package csc420;
 
 import csc420.gui.SwingTesting;
-import csc420.twitterapi.TwitterAPI;
-import csc420.models.TwitterUser;
 import java.awt.EventQueue;
-import twitter4j.TwitterException;
 
 /**
  *
@@ -35,16 +32,6 @@ import twitter4j.TwitterException;
  */
 public class Main {
     public static void main(String[] args) {
-/*
-        try {
-            TwitterAPI twitterApi = new TwitterAPI();
-            TwitterUser testUser = twitterApi.getByUsername("java");
-            System.out.println(testUser.getHandle());
-        } catch(TwitterException e) {
-            // TODO: Handle failed initialization of TwitterAPI.
-            e.printStackTrace();
-        }
-*/
         EventQueue.invokeLater(() -> {
             new SwingTesting("Testing Testing").setVisible(true); 
         });
