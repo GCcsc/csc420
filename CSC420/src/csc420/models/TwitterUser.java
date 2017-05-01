@@ -24,6 +24,7 @@
 package csc420.models;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  *
@@ -73,6 +74,15 @@ public class TwitterUser implements Comparable<TwitterUser>, Serializable {
     public String getProfileImageUrl() {
         return profileImageUrl;
     }
+    
+    @Override
+    public String toString() {
+        return String.format("{\"id\": %d%n, \"handle\": \"%s\", \"followers_count\": %d, \"profileImageUrl\": \"%s\"}",
+                id,
+                handle,
+                followersCount,
+                profileImageUrl);
+    }
 
     @Override
     public int compareTo(TwitterUser other) {
@@ -85,6 +95,36 @@ public class TwitterUser implements Comparable<TwitterUser>, Serializable {
         else {
             return 1;
         }
+    }
+    
+    @Override
+    public boolean equals(Object other) {
+        if(!(other instanceof TwitterUser)) {
+            return false;
+        }
+        if(this == other) {
+            return true;
+        }
+        TwitterUser o = (TwitterUser) other;
+        if(this.id == o.getId()
+                && this.handle.equals(o.getHandle())
+                && this.followersCount == o.getFollowersCount()
+                && this.profileImageUrl.equals(o.getProfileImageUrl())) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 79 * hash + Objects.hashCode(this.handle);
+        hash = 79 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 79 * hash + this.followersCount;
+        hash = 79 * hash + Objects.hashCode(this.profileImageUrl);
+        return hash;
     }
     
 }
