@@ -24,8 +24,9 @@
 package csc420.gui;
 
 import csc420.models.TwitterUser;
+import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.image.BufferedImage;
+import java.awt.Font;
 import java.io.IOException;
 import java.net.URL;
 import javax.imageio.ImageIO;
@@ -44,20 +45,18 @@ public class UserSearchProfileHistoryListCell extends JPanel implements ListCell
     JLabel userProfilePhoto;
     JLabel userProfileName;
     JLabel userFollowersCount;
+    JPanel userInfoBox;
+    
     public UserSearchProfileHistoryListCell() {
         userProfilePhoto = new JLabel();
-        //userProfilePhoto.setIcon(loadImageFromUrl("https://whatever.com/image.jpg"));
         userProfileName = new JLabel();
         userFollowersCount = new JLabel();
-        initComponents();
-    }
-    
-    private void initComponents() {
-        setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+        userInfoBox = new JPanel();
     }
     
     /**
-     * 
+     * Return the user's main profile image to be displayed as a thumbnail in the
+     * searched users history list.
      * @param twitterProfilePhotoUrl String providing the location of the twitter profile image.
      * @return (ImageIcon|null) ImageIcon used to represent a profile photo.
      */
@@ -79,7 +78,19 @@ public class UserSearchProfileHistoryListCell extends JPanel implements ListCell
             boolean isSelected, 
             boolean cellHasFocus) {
         
-        return new Component() {};
+        setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+        
+        Font listFont = list.getFont();
+        userProfileName.setFont(listFont);
+        userFollowersCount.setFont(listFont);
+        userProfilePhoto.setIcon(loadImageFromUrl(user.getProfileImageUrl()));
+        
+        userInfoBox.add(userProfileName, BorderLayout.NORTH);
+        userInfoBox.add(userFollowersCount, BorderLayout.SOUTH);
+        add(userProfilePhoto);
+        add(userInfoBox);
+        
+        return this;
         
     }
     
