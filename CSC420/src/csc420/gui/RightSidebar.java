@@ -28,6 +28,7 @@ import java.awt.Dimension;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -36,8 +37,12 @@ import javax.swing.JTextField;
  *
  * @author chasetoy
  */
-public class RightSidebar extends JPanel {
+public class RightSidebar extends JPanel{
     RightSidebar rightSideBar;
+    JButton followers;
+    JButton following;
+    JButton retweets;
+    JButton likes;
     
     public RightSidebar(){
         initComponents();
@@ -49,5 +54,14 @@ public class RightSidebar extends JPanel {
         Dimension dim1 = getPreferredSize();
         dim1.width = 250;
         setPreferredSize(dim1);
+        followers = new JButton("Followers");
+        following = new JButton("Following");
+        retweets = new JButton("Retweets");
+        likes = new JButton("Likes");
+        add(followers);
+        add(following);
+        add(retweets);
+        add(likes);
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     }
 }
