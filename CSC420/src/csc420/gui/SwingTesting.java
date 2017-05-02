@@ -32,6 +32,7 @@ import javax.swing.JFrame;
  */
 public class SwingTesting extends JFrame {
     LeftSidebar leftSideBar = new LeftSidebar();
+    SearchBar searchBar = new SearchBar();
     public SwingTesting(String title) {
         super(title);
         
@@ -42,6 +43,7 @@ public class SwingTesting extends JFrame {
         setLayout(new BorderLayout());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setBounds(10,10,960,720);
+        this.add(searchBar, BorderLayout.WEST);
         this.add(leftSideBar, BorderLayout.WEST);
     }
 }

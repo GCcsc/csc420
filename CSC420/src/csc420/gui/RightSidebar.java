@@ -40,7 +40,6 @@ public class RightSidebar extends JPanel {
     RightSidebar rightSideBar;
     
     public RightSidebar(){
-        this.rightSideBar = new RightSidebar();
         initComponents();
     }
     

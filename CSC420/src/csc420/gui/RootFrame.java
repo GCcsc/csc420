@@ -32,7 +32,7 @@ import javax.swing.JFrame;
  */
 public class RootFrame extends JFrame {
     LeftSidebar leftSideBar = new LeftSidebar();
-    RightSidebar righSideBar = new RightSidebar();
+    RightSidebar rightSideBar = new RightSidebar();
     public RootFrame(String title) {
         super(title);
         
