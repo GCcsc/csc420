@@ -23,7 +23,7 @@
  */
 package csc420;
 
-import csc420.gui.SwingTesting;
+import csc420.gui.RootFrame;
 import java.awt.EventQueue;
 
 /**
@@ -33,7 +33,7 @@ import java.awt.EventQueue;
 public class Main {
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
-            new SwingTesting("Testing Testing").setVisible(true); 
+            new RootFrame("Testing Testing").setVisible(true); 
         });
     }
 }
