@@ -43,7 +43,7 @@ public class LeftSidebar extends JPanel {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setOpaque(true);
         Dimension dim = getPreferredSize();
-        dim.width = 400;
+        dim.width = 250;
         setPreferredSize(dim);
         
         add(userSearchBar);
