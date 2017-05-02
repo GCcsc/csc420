@@ -33,9 +33,11 @@ import javax.swing.JPanel;
  */
 public class LeftSidebar extends JPanel {
     UserSearchBar userSearchBar;
+    UserProfileSearchHistory userSearchHistory;
     
     public LeftSidebar() {
         this.userSearchBar = new UserSearchBar();
+        this.userSearchHistory = new UserProfileSearchHistory();
         initComponents();
     }
     
@@ -47,5 +49,6 @@ public class LeftSidebar extends JPanel {
         setPreferredSize(dim);
         
         add(userSearchBar);
+        add(userSearchHistory);
     }
 }

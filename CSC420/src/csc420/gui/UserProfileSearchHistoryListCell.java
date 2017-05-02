@@ -42,13 +42,11 @@ import javax.swing.ListCellRenderer;
  * @author Cameron J. Everett, Chase Toy, Laura Buckman
  */
 public class UserProfileSearchHistoryListCell extends JPanel implements ListCellRenderer<TwitterUser> {
-    JLabel userProfilePhoto;
     JLabel userProfileName;
     JLabel userFollowersCount;
     JPanel userInfoBox;
     
     public UserProfileSearchHistoryListCell() {
-        userProfilePhoto = new JLabel();
         userProfileName = new JLabel();
         userFollowersCount = new JLabel();
         userInfoBox = new JPanel();
@@ -66,6 +64,7 @@ public class UserProfileSearchHistoryListCell extends JPanel implements ListCell
             return new ImageIcon(ImageIO.read(url));
         } catch(IOException e) {
             e.printStackTrace();
+            System.out.println("BING");
             return null;
         }
     }
@@ -83,11 +82,12 @@ public class UserProfileSearchHistoryListCell extends JPanel implements ListCell
         Font listFont = list.getFont();
         userProfileName.setFont(listFont);
         userFollowersCount.setFont(listFont);
-        userProfilePhoto.setIcon(loadImageFromUrl(user.getProfileImageUrl()));
+        
+        userProfileName.setText(user.getHandle());
+        userFollowersCount.setText(String.valueOf(user.getFollowersCount()));
         
         userInfoBox.add(userProfileName, BorderLayout.NORTH);
         userInfoBox.add(userFollowersCount, BorderLayout.SOUTH);
-        add(userProfilePhoto);
         add(userInfoBox);
         
         return this;
