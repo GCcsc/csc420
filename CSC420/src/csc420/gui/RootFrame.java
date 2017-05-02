@@ -32,6 +32,7 @@ import javax.swing.JFrame;
  */
 public class RootFrame extends JFrame {
     LeftSidebar leftSideBar = new LeftSidebar();
+    RightSidebar righSideBar = new RightSidebar();
     public RootFrame(String title) {
         super(title);
         
@@ -43,5 +44,6 @@ public class RootFrame extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setBounds(10,10,960,720);
         this.add(leftSideBar, BorderLayout.WEST);
+        this.add(rightSideBar, BorderLayout.EAST);
     }
 }
