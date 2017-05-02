@@ -23,29 +23,31 @@
  */
 package csc420.gui;
 
-import java.awt.BorderLayout;
-import javax.swing.JFrame;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  *
  * @author chasetoy
  */
-public class RootFrame extends JFrame {
-    LeftSidebar leftSideBar = new LeftSidebar();
-    RightSidebar rightSideBar = new RightSidebar();
-    ResultsPane resultsPane = new ResultsPane();
-    public RootFrame(String title) {
-        super(title);
-        
+public class ResultsPane extends JPanel {
+    ResultsPane resultsPane;
+    
+    public ResultsPane(){
         initComponents();
     }
     
-    private void initComponents() {
-        setLayout(new BorderLayout());
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setBounds(10,10,960,720);
-        this.add(leftSideBar, BorderLayout.WEST);
-        this.add(rightSideBar, BorderLayout.EAST);
-        this.add(resultsPane, BorderLayout.CENTER);
+    private void initComponents(){
+        setOpaque(true);
+        setBackground(Color.YELLOW);
+        Dimension dim1 = getPreferredSize();
+        dim1.width = 250;
+        setPreferredSize(dim1);
     }
 }
