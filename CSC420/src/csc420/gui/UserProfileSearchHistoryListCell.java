@@ -25,10 +25,16 @@ package csc420.gui;
 
 import csc420.models.TwitterUser;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -45,11 +51,13 @@ public class UserProfileSearchHistoryListCell extends JPanel implements ListCell
     JLabel userProfileName;
     JLabel userFollowersCount;
     JPanel userInfoBox;
+    JLabel userProfilePhoto;
     
     public UserProfileSearchHistoryListCell() {
         userProfileName = new JLabel();
         userFollowersCount = new JLabel();
         userInfoBox = new JPanel();
+        userProfilePhoto = new JLabel();
     }
     
     /**
@@ -71,21 +79,35 @@ public class UserProfileSearchHistoryListCell extends JPanel implements ListCell
             boolean isSelected, 
             boolean cellHasFocus) {
         
-        setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         
         Font listFont = list.getFont();
         userProfileName.setFont(listFont);
         userFollowersCount.setFont(listFont);
         
-        userProfileName.setText(user.getHandle());
-        userFollowersCount.setText(String.valueOf(user.getFollowersCount()));
+        BufferedImage photo;
+        try {
+            photo = ImageIO.read(new URL(user.getProfileImageUrl()));
+            if(photo != null) {
+                System.out.println("BING");
+                userProfilePhoto.setIcon(new ImageIcon(getClass().getResource("csc420/resources/twitter_logo.png")));
+            }
+            else {
+                URL defaultPhotoUrl = getClass().getResource("csc420/resources/twitter_logo.png");
+                photo = ImageIO.read(defaultPhotoUrl);
+                userProfilePhoto.setIcon(new ImageIcon(photo));
+            }
+        } catch (IOException e) {
+            System.out.println("Bad link provided for profile photo.");
+        }
         
-        userInfoBox.add(userProfileName, BorderLayout.NORTH);
-        userInfoBox.add(userFollowersCount, BorderLayout.SOUTH);
-        add(userInfoBox);
+        userProfileName.setText("@" + user.getHandle());
+        userFollowersCount.setText("Followers: " + String.valueOf(user.getFollowersCount()));
         
-        return this;
-        
+        userInfoBox.add(userProfilePhoto);
+        userInfoBox.add(userProfileName);
+        userInfoBox.add(userFollowersCount);
+        return this;        
     }
     
 }
