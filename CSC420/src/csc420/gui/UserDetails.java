@@ -28,12 +28,9 @@ import csc420.models.TwitterUser;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 /**
  *
@@ -88,9 +85,7 @@ public class UserDetails extends JPanel {
     }
 
     public void getCurrentUser(TwitterUser currentUser) {
-        this.currentUser = currentUser;
-        System.out.println("UserDetails: " + this.currentUser);
-        
+        this.currentUser = currentUser;        
         UserHandle.setText("Name: " + currentUser.getHandle());
         UserFollowers.setText("Followers: " + currentUser.getFollowersCount());
     }
