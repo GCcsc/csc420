@@ -68,7 +68,7 @@ public class TwitterAPI {
         User user = twitter.showUser(userId);
         return new TwitterUser(
                 user.getId(),
-                user.getName(),
+                user.getScreenName(),
                 user.getFollowersCount(),
                 user.getProfileImageURL()
         );
@@ -83,9 +83,10 @@ public class TwitterAPI {
      */
     public TwitterUser getByUsername(String username) throws TwitterException {
         User user = twitter.showUser(username);
+        System.out.println("RESPONSE: " + user);
         return new TwitterUser(
                 user.getId(),
-                user.getName(),
+                user.getScreenName(),
                 user.getFollowersCount(),
                 user.getProfileImageURL()
         );

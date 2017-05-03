@@ -24,10 +24,11 @@
 package csc420.gui;
 
 import csc420.models.TwitterUser;
+import java.awt.Dimension;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.ListSelectionModel;
+import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -37,11 +38,12 @@ import javax.swing.event.ListSelectionListener;
  */
 public class UserProfileSearchHistory extends JPanel {
     JList<TwitterUser> searchHistory;
+    JScrollPane scrollPane;
     DefaultListModel<TwitterUser> searchModel;
     public UserProfileSearchHistory() {
-        searchModel = new DefaultListModel<>();        
+        searchModel = new DefaultListModel<>(); 
         searchHistory = new JList<>(searchModel);
-        searchHistory.addListSelectionListener(new UserSearchHistorySelectionHandler());
+        scrollPane = new JScrollPane(searchHistory, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         initComponents();
     }
     
@@ -51,7 +53,7 @@ public class UserProfileSearchHistory extends JPanel {
      */
     public void addUser(TwitterUser searchedUser) {
         if(searchedUser != null) 
-            searchModel.addElement(searchedUser);
+            searchModel.add(0, searchedUser);
     }
     
     /**
@@ -73,7 +75,12 @@ public class UserProfileSearchHistory extends JPanel {
     
     private void initComponents() {
         searchHistory.setCellRenderer(new UserProfileSearchHistoryListCell());
-        add(searchHistory);
+        searchHistory.addListSelectionListener(new UserSearchHistorySelectionHandler());
+        
+        scrollPane.setMinimumSize(new Dimension(250, 200));
+        scrollPane.setPreferredSize(new Dimension(250, 600));
+        
+        add(scrollPane);
     }
     
     class UserSearchHistorySelectionHandler implements ListSelectionListener {

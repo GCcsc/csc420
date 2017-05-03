@@ -36,9 +36,7 @@ public class RootFrame extends JFrame {
     private RightSidebar rightSideBar = new RightSidebar();
     private ResultsPane resultsPane = new ResultsPane();
     private UserDetails userDetails = new UserDetails();
-    
-    private AppEventManager appEventManager;
-    
+        
     public RootFrame(String title) {
         super(title);
         AppEventManager.setResultsPanel(resultsPane);
