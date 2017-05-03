@@ -60,17 +60,6 @@ public class UserProfileSearchHistoryListCell extends JPanel implements ListCell
         userProfilePhoto = new JLabel();
     }
     
-    /**
-     * Return the user's main profile image to be displayed as a thumbnail in the
-     * searched users history list.
-     * @param twitterProfilePhoto Image to be passed into search history entry.
-     * @return (ImageIcon|null) ImageIcon used to represent a profile photo.
-     */
-    public ImageIcon loadProfileImage(ImageIcon twitterProfilePhoto) {
-        // TODO: If null return another default image.
-        return twitterProfilePhoto;
-    }
-    
     @Override
     public Component getListCellRendererComponent(
             JList<? extends TwitterUser> list,
