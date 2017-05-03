@@ -55,18 +55,12 @@ public class UserProfileSearchHistoryListCell extends JPanel implements ListCell
     /**
      * Return the user's main profile image to be displayed as a thumbnail in the
      * searched users history list.
-     * @param twitterProfilePhotoUrl String providing the location of the twitter profile image.
+     * @param twitterProfilePhoto Image to be passed into search history entry.
      * @return (ImageIcon|null) ImageIcon used to represent a profile photo.
      */
-    private ImageIcon loadImageFromUrl(String twitterProfilePhotoUrl) {
-        try {
-            URL url = new URL(twitterProfilePhotoUrl);
-            return new ImageIcon(ImageIO.read(url));
-        } catch(IOException e) {
-            e.printStackTrace();
-            System.out.println("BING");
-            return null;
-        }
+    public ImageIcon loadProfileImage(ImageIcon twitterProfilePhoto) {
+        // TODO: If null return another default image.
+        return twitterProfilePhoto;
     }
     
     @Override
