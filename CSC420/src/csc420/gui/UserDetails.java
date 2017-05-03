@@ -24,6 +24,7 @@
 package csc420.gui;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.KeyAdapter;
@@ -72,7 +73,7 @@ public class UserDetails extends JPanel {
     
     private void initInfo(){
         UserInfo.setOpaque(true);
-        UserInfo.setBackground(Color.LIGHT_GRAY);
+        UserInfo.setBackground(Color.DARK_GRAY);
         UserHandle = new JLabel("UserHandle");
         UserFollowers = new JLabel("UserFollowers");
         UserFollowing = new JLabel("UserFollowing");

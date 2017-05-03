@@ -45,7 +45,8 @@ public class ResultsPane extends JPanel {
     
     private void initComponents(){
         setOpaque(true);
-        setBackground(Color.YELLOW);
+        Color twitter = new Color(0,204,255);
+        setBackground(twitter);
         Dimension dim1 = getPreferredSize();
         dim1.width = 250;
         setPreferredSize(dim1);

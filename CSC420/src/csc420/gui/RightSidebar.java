@@ -54,31 +54,32 @@ public class RightSidebar extends JPanel{
     
     private void initComponents(){
         setOpaque(true);
-        setBackground(Color.RED);
+        Color twitter = new Color(0,132,180);
+        setBackground(twitter);
         Dimension dim1 = getPreferredSize();
         dim1.width = 250;
         setPreferredSize(dim1);
         followers = new JButton("Followers"){
             {
-                setSize(150, 75);
+                setSize(100, 50);
                 setMaximumSize(getSize());
             }
         };
         following = new JButton("Following"){
             {
-                setSize(150, 75);
+                setSize(100, 50);
                 setMaximumSize(getSize());
             }
         };
         retweets = new JButton("Retweets"){
             {
-                setSize(150, 75);
+                setSize(100, 50);
                 setMaximumSize(getSize());
             }
         };
         likes = new JButton("Likes"){
             {
-                setSize(150, 75);
+                setSize(100, 50);
                 setMaximumSize(getSize());
             }
         };
