@@ -38,17 +38,36 @@ import javax.swing.JTextField;
  */
 public class UserDetails extends JPanel {
     UserDetails userDetails;
+    JPanel UserPhotos;
+    JPanel UserInfo;
     
     public UserDetails(){
+        UserPhotos = new JPanel();
+        UserInfo = new JPanel();
         initComponents();
     }
     
     private void initComponents(){
         setOpaque(true);
+        setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         setBackground(Color.orange);
         Dimension dim1 = getPreferredSize();
         dim1.width = 250;
-        setPreferredSize(dim1);
+        setMinimumSize(dim1);
+        initPhoto();
+        initInfo();
+        add(UserPhotos);
+        add(UserInfo);
+    }
+    
+    private void initPhoto(){
+        UserPhotos.setOpaque(true);
+        UserPhotos.setBackground(Color.DARK_GRAY);
+    }
+    
+    private void initInfo(){
+        UserInfo.setOpaque(true);
+        UserInfo.setBackground(Color.LIGHT_GRAY);
     }
     
 }

@@ -35,6 +35,7 @@ public class RootFrame extends JFrame {
     RightSidebar rightSideBar = new RightSidebar();
     ResultsPane resultsPane = new ResultsPane();
     UserDetails userDetails = new UserDetails();
+    
     public RootFrame(String title) {
         super(title);
         
