@@ -87,6 +87,7 @@ public class RightSidebar extends JPanel{
         following.setAlignmentX(Component.CENTER_ALIGNMENT);
         retweets.setAlignmentX(Component.CENTER_ALIGNMENT);
         likes.setAlignmentX(Component.CENTER_ALIGNMENT);
+        setBackground(twitter);
         initButtons();
         add(followers);
         add(following);

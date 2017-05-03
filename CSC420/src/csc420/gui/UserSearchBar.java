@@ -24,6 +24,7 @@
 package csc420.gui;
 
 import csc420.AppEventManager;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -52,6 +53,10 @@ public class UserSearchBar extends JPanel {
         
         add(fieldLabel);
         add(userTextField);
+        
+        Color twitter = new Color(0,132,180);
+        setBackground(twitter);
+        fieldLabel.setBackground(twitter);
     }
     
     private void initializeUserTextField() {
