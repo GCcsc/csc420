@@ -38,17 +38,48 @@ import javax.swing.JTextField;
  */
 public class UserDetails extends JPanel {
     UserDetails userDetails;
+    JPanel UserPhotos;
+    JPanel UserInfo;
+    JLabel UserHandle;
+    JLabel UserFollowers;
+    JLabel UserFollowing;
+    JLabel UserSummary;
     
     public UserDetails(){
+        UserPhotos = new JPanel();
+        UserInfo = new JPanel();
         initComponents();
     }
     
     private void initComponents(){
         setOpaque(true);
+        setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         setBackground(Color.orange);
         Dimension dim1 = getPreferredSize();
         dim1.width = 250;
-        setPreferredSize(dim1);
+        setMinimumSize(dim1);
+        initPhoto();
+        initInfo();
+        add(UserPhotos);
+        add(UserInfo);
     }
     
+    private void initPhoto(){
+        UserPhotos.setOpaque(true);
+        UserPhotos.setBackground(Color.DARK_GRAY);
+    }
+    
+    private void initInfo(){
+        UserInfo.setOpaque(true);
+        UserInfo.setBackground(Color.LIGHT_GRAY);
+        UserHandle = new JLabel("UserHandle");
+        UserFollowers = new JLabel("UserFollowers");
+        UserFollowing = new JLabel("UserFollowing");
+        UserSummary = new JLabel("UserSummary");
+        UserInfo.add(UserHandle);
+        UserInfo.add(UserFollowers);
+        UserInfo.add(UserFollowing);
+        UserInfo.add(UserSummary);
+        UserInfo.setLayout(new BoxLayout(UserInfo, BoxLayout.Y_AXIS));
+    }
 }

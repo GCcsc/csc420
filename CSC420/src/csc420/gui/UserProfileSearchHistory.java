@@ -24,8 +24,12 @@
 package csc420.gui;
 
 import csc420.models.TwitterUser;
+import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -33,19 +37,60 @@ import javax.swing.JPanel;
  */
 public class UserProfileSearchHistory extends JPanel {
     JList<TwitterUser> searchHistory;
-    
+    DefaultListModel<TwitterUser> searchModel;
     TwitterUser[] dummyData = {
         new TwitterUser(0, "gradle", 1024, "https://pbs.twimg.com/profile_images/426420605945004032/K85ZWV2F.png"),
-        new TwitterUser(1, "java", 2048, "https://pbs.twimg.com/profile_images/426420605945004032/K85ZWV2F.png")
+        new TwitterUser(1, "java", 2048, "https://pbs.twimg.com/profile_images/426420605945004032/K85ZWV2F.png"),
+        new TwitterUser(2, "scala", 4096, "https://pbs.twimg.com/profile_images/3310435403/dc47c969494d3279783610ba3298f58b.png")
     }; 
     public UserProfileSearchHistory() {
-        searchHistory = new JList<>(dummyData);
+        searchModel = new DefaultListModel<>();
+        for(TwitterUser user : dummyData) {
+            searchModel.addElement(user);
+        }
         
+        searchHistory = new JList<>(searchModel);
+        searchHistory.addListSelectionListener(new UserSearchHistorySelectionHandler());
         initComponents();
+    }
+    
+    /**
+     * Adds a user to the list of recently searched user profiles.
+     * @param searchedUser User really returned from the Twitter API.
+     */
+    public void addUser(TwitterUser searchedUser) {
+        if(searchedUser != null) 
+            searchModel.addElement(searchedUser);
+    }
+    
+    /**
+     * Removes an entry in the recently searched user profiles.
+     * @param index Marker for deleting 
+     */
+    public void removeAt(int index) {
+        if(index < searchModel.getSize() && index >= 0) {
+            searchModel.remove(index);
+        }
+    }
+    
+    /**
+     * Clears the list of recently searched users.
+     */
+    public void clear() {
+        searchModel.clear();
     }
     
     private void initComponents() {
         searchHistory.setCellRenderer(new UserProfileSearchHistoryListCell());
         add(searchHistory);
+    }
+    
+    class UserSearchHistorySelectionHandler implements ListSelectionListener {
+
+        @Override
+        public void valueChanged(ListSelectionEvent e) {
+            System.out.println(searchHistory.getSelectedValue());
+        }
+        
     }
 }
