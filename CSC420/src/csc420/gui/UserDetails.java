@@ -25,6 +25,7 @@ package csc420.gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.BoxLayout;
@@ -53,7 +54,7 @@ public class UserDetails extends JPanel {
     
     private void initComponents(){
         setOpaque(true);
-        setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+        setLayout(new GridLayout(1,2));
         setBackground(Color.orange);
         Dimension dim1 = getPreferredSize();
         dim1.width = 720;
