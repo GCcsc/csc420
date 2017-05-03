@@ -24,6 +24,7 @@
 package csc420.gui;
 
 import csc420.models.TwitterUser;
+import java.awt.Dimension;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -75,6 +76,10 @@ public class UserProfileSearchHistory extends JPanel {
     private void initComponents() {
         searchHistory.setCellRenderer(new UserProfileSearchHistoryListCell());
         searchHistory.addListSelectionListener(new UserSearchHistorySelectionHandler());
+        
+        scrollPane.setMinimumSize(new Dimension(250, 200));
+        scrollPane.setPreferredSize(new Dimension(250, 600));
+        
         add(scrollPane);
     }
     
