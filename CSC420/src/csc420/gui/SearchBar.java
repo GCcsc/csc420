@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2017 Laura Buckman, Chase Toy, Cameron Everett.
+ * Copyright 2017 chasetoy.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,19 +21,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package csc420;
+package csc420.gui;
 
-import csc420.gui.RootFrame;
-import java.awt.EventQueue;
+import javax.swing.JFrame;
+import java.awt.Color;
+import java.awt.Dimension;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  *
- * @author Laura Hunt, Chase Toy, Cameron Everett
+ * @author chasetoy
  */
-public class Main {
-    public static void main(String[] args) {
-        EventQueue.invokeLater(() -> {
-            new RootFrame("Testing Testing").setVisible(true); 
-        });
+public class SearchBar extends JPanel {
+    JLabel userSearchFieldLabel;
+    JTextField userSearchField;
+    
+    public SearchBar(){
+        initComponents();
     }
+    
+    private void initComponents(){
+        setOpaque(true);
+        setBackground(Color.CYAN);
+        Dimension dim1 = getPreferredSize();
+        dim1.width = 100;
+        setPreferredSize(dim1);
+    }
+
 }

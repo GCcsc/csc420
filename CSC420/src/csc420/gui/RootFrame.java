@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2017 Laura Buckman, Chase Toy, Cameron Everett.
+ * Copyright 2017 chasetoy.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,19 +21,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package csc420;
+package csc420.gui;
 
-import csc420.gui.RootFrame;
-import java.awt.EventQueue;
+import java.awt.BorderLayout;
+import javax.swing.JFrame;
 
 /**
  *
- * @author Laura Hunt, Chase Toy, Cameron Everett
+ * @author chasetoy
  */
-public class Main {
-    public static void main(String[] args) {
-        EventQueue.invokeLater(() -> {
-            new RootFrame("Testing Testing").setVisible(true); 
-        });
+public class RootFrame extends JFrame {
+    LeftSidebar leftSideBar = new LeftSidebar();
+    RightSidebar rightSideBar = new RightSidebar();
+    ResultsPane resultsPane = new ResultsPane();
+    UserDetails userDetails = new UserDetails();
+    public RootFrame(String title) {
+        super(title);
+        
+        initComponents();
+    }
+    
+    private void initComponents() {
+        setLayout(new BorderLayout());
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setBounds(10,10,960,720);
+        this.add(leftSideBar, BorderLayout.WEST);
+        this.add(rightSideBar, BorderLayout.EAST);
+        this.add(resultsPane, BorderLayout.CENTER);
+        this.add(userDetails, BorderLayout.SOUTH);
     }
 }

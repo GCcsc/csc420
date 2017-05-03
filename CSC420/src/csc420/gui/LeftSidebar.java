@@ -23,33 +23,32 @@
  */
 package csc420.gui;
 
-import java.awt.Color;
 import java.awt.Dimension;
-import javax.swing.JLabel;
+import javax.swing.BoxLayout;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 /**
  *
  * @author cam
  */
 public class LeftSidebar extends JPanel {
-    JLabel userSearchFieldLabel;
-    JTextField userSearchField;
+    UserSearchBar userSearchBar;
+    UserProfileSearchHistory userSearchHistory;
     
     public LeftSidebar() {
+        this.userSearchBar = new UserSearchBar();
+        this.userSearchHistory = new UserProfileSearchHistory();
         initComponents();
     }
     
     private void initComponents() {
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setOpaque(true);
-        setBackground(Color.GREEN);
         Dimension dim = getPreferredSize();
         dim.width = 250;
         setPreferredSize(dim);
-    }
-    
-    private void initUserSearchField() {
         
+        add(userSearchBar);
+        add(userSearchHistory);
     }
 }

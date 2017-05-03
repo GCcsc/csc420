@@ -32,7 +32,7 @@ import twitter4j.auth.AccessToken;
 
 /**
  *
- * @author Cameron J. Everett
+ * @author Cameron J. Everett, Chase Toy, Laura Buckman
  * 
  * Responsible for creating connection to Twitter API.
  */

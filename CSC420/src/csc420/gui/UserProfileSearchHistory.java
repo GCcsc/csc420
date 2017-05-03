@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2017 Laura Buckman, Chase Toy, Cameron Everett.
+ * Copyright 2017 cam.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,19 +21,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package csc420;
+package csc420.gui;
 
-import csc420.gui.RootFrame;
-import java.awt.EventQueue;
+import csc420.models.TwitterUser;
+import javax.swing.JList;
+import javax.swing.JPanel;
 
 /**
  *
- * @author Laura Hunt, Chase Toy, Cameron Everett
+ * @author cam
  */
-public class Main {
-    public static void main(String[] args) {
-        EventQueue.invokeLater(() -> {
-            new RootFrame("Testing Testing").setVisible(true); 
-        });
+public class UserProfileSearchHistory extends JPanel {
+    JList<TwitterUser> searchHistory;
+    
+    TwitterUser[] dummyData = {
+        new TwitterUser(0, "gradle", 1024, "https://pbs.twimg.com/profile_images/426420605945004032/K85ZWV2F.png"),
+        new TwitterUser(1, "java", 2048, "https://pbs.twimg.com/profile_images/426420605945004032/K85ZWV2F.png")
+    }; 
+    public UserProfileSearchHistory() {
+        searchHistory = new JList<>(dummyData);
+        
+        initComponents();
+    }
+    
+    private void initComponents() {
+        searchHistory.setCellRenderer(new UserProfileSearchHistoryListCell());
+        add(searchHistory);
     }
 }
