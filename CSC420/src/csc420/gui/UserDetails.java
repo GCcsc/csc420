@@ -67,15 +67,9 @@ public class UserDetails extends JPanel {
     private void initPhoto(){
         UserPhotos.setOpaque(true);
         UserPhotos.setBackground(Color.DARK_GRAY);
-        Dimension dim1 = getPreferredSize();
-        dim1.width = 360;
-        setMinimumSize(dim1);
     }
     
     private void initInfo(){
-        Dimension dim1 = getPreferredSize();
-        dim1.width = 360;
-        setMinimumSize(dim1);
         UserInfo.setOpaque(true);
         UserInfo.setBackground(Color.LIGHT_GRAY);
         UserHandle = new JLabel("UserHandle");
