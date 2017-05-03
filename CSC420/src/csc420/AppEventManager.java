@@ -50,40 +50,67 @@ public class AppEventManager {
         }
     }
     
+    /**
+     * Get instance of the UserProfileSearchHistory panel.
+     * @param target 
+     */
     public static void setSearchHistoryPanel(UserProfileSearchHistory target) {
         searchHistoryPanel = target;
     }
     
+    /**
+     * Get instance of the UserDetails panel.
+     * @param target 
+     */
     public static void setUserDetailsPanel(UserDetails target) {
         userDetailsPanel = target;
     }
     
+    /**
+     * Get an instance of the ResultsPane panel.
+     * @param target 
+     */
     public static void setResultsPanel(ResultsPane target) {
         resultsPanel = target;
     }
     
+    /**
+     * Return the currently focused user account.
+     * @return 
+     */
     public static TwitterUser getCurrentUser() {
         return currentUser;
     }
     
+    /**
+     * Update the currently focused user account.
+     * @param user 
+     */
     public static void setCurrentUser(TwitterUser user) {
         currentUser = user;
         searchHistoryPanel.addUser(currentUser);
         userDetailsPanel.getCurrentUser(currentUser);
     }
     
+    /**
+     * Both makes an HTTP request and updates current user account based on searched username.
+     * @param username 
+     */
     public static void apiGetUserByName(String username) {
         try {
-            currentUser = twitterApi.getByUsername(username);
-            setCurrentUser(currentUser);
+            setCurrentUser(twitterApi.getByUsername(username));
         } catch(TwitterException e) {
             System.out.println("An error occurred while processing request. \nPlease check your network connection and spelling of username.");
         }
     }
     
+    /**
+     * Both makes an HTTP request and updates current user account based on searched user id.
+     * @param userId 
+     */
     public static void apiGetUserById(long userId) {
         try {
-            currentUser = twitterApi.getById(userId);
+            setCurrentUser(twitterApi.getById(userId));
         } catch(TwitterException e) {
             System.out.println("Could not find user with this twitter handle.");
             e.printStackTrace();
