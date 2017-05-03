@@ -90,7 +90,7 @@ public class UserProfileSearchHistoryListCell extends JPanel implements ListCell
             photo = ImageIO.read(new URL(user.getProfileImageUrl()));
             if(photo != null) {
                 System.out.println("BING");
-                userProfilePhoto.setIcon(new ImageIcon(getClass().getResource("csc420/resources/twitter_logo.png")));
+                userProfilePhoto.setIcon(new ImageIcon(photo));
             }
             else {
                 URL defaultPhotoUrl = getClass().getResource("csc420/resources/twitter_logo.png");
@@ -107,6 +107,7 @@ public class UserProfileSearchHistoryListCell extends JPanel implements ListCell
         userInfoBox.add(userProfilePhoto);
         userInfoBox.add(userProfileName);
         userInfoBox.add(userFollowersCount);
+        add(userInfoBox);
         return this;        
     }
     
