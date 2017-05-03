@@ -32,6 +32,7 @@ import java.awt.EventQueue;
  */
 public class Main {
     public static void main(String[] args) {
+        AppEventManager appEventManager = new AppEventManager();
         EventQueue.invokeLater(() -> {
             new RootFrame("Testing Testing").setVisible(true); 
         });

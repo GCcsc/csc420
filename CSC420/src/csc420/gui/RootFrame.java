@@ -23,6 +23,7 @@
  */
 package csc420.gui;
 
+import csc420.AppEventManager;
 import java.awt.BorderLayout;
 import javax.swing.JFrame;
 
@@ -31,14 +32,16 @@ import javax.swing.JFrame;
  * @author chasetoy
  */
 public class RootFrame extends JFrame {
-    LeftSidebar leftSideBar = new LeftSidebar();
-    RightSidebar rightSideBar = new RightSidebar();
-    ResultsPane resultsPane = new ResultsPane();
-    UserDetails userDetails = new UserDetails();
+    private LeftSidebar leftSideBar = new LeftSidebar();
+    private RightSidebar rightSideBar = new RightSidebar();
+    private ResultsPane resultsPane = new ResultsPane();
+    private UserDetails userDetails = new UserDetails();
+    
+    private AppEventManager appEventManager;
     
     public RootFrame(String title) {
         super(title);
-        
+        AppEventManager.setResultsPanel(resultsPane);
         initComponents();
     }
     
