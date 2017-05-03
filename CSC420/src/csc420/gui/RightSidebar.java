@@ -25,6 +25,8 @@ package csc420.gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.BoxLayout;
@@ -59,9 +61,37 @@ public class RightSidebar extends JPanel{
         retweets = new JButton("Retweets");
         likes = new JButton("Likes");
         add(followers);
+        initButtons();
         add(following);
         add(retweets);
         add(likes);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+    }
+    
+    public void initButtons(){
+        followers.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                System.out.println("followers button was pressed!");
+            } 
+        });
+        following.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                System.out.println("following button was pressed!");
+            }
+        });
+        retweets.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                System.out.println("retweets button was pressed!");
+            }
+        });
+        likes.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                System.out.println("likes button was pressed!");
+            }
+        });
     }
 }
