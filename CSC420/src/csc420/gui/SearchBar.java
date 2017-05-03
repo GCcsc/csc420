@@ -23,7 +23,6 @@
  */
 package csc420.gui;
 
-import javax.swing.JFrame;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JLabel;

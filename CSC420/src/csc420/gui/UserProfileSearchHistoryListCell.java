@@ -24,7 +24,6 @@
 package csc420.gui;
 
 import csc420.models.TwitterUser;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.image.BufferedImage;
