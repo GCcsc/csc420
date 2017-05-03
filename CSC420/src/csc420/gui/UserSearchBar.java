@@ -62,7 +62,10 @@ public class UserSearchBar extends JPanel {
                 if(e.getKeyCode() == KeyEvent.VK_ENTER) {
                     System.out.print("Firing off search for Twitter user profile: ");
                     System.out.println(userTextField.getText());
+                    userTextField.setEnabled(false);
                     AppEventManager.apiGetUserByName(userTextField.getText());
+                    userTextField.setText("");
+                    userTextField.setEnabled(true);
                 }
             }
         });
