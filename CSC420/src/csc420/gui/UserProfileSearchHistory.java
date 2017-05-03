@@ -42,7 +42,7 @@ public class UserProfileSearchHistory extends JPanel {
     public UserProfileSearchHistory() {
         searchModel = new DefaultListModel<>(); 
         searchHistory = new JList<>(searchModel);
-        scrollPane = new JScrollPane(searchHistory);
+        scrollPane = new JScrollPane(searchHistory, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         initComponents();
     }
     
