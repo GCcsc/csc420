@@ -27,7 +27,7 @@ import csc420.models.TwitterUser;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.ListSelectionModel;
+import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -37,11 +37,12 @@ import javax.swing.event.ListSelectionListener;
  */
 public class UserProfileSearchHistory extends JPanel {
     JList<TwitterUser> searchHistory;
+    JScrollPane scrollPane;
     DefaultListModel<TwitterUser> searchModel;
     public UserProfileSearchHistory() {
-        searchModel = new DefaultListModel<>();        
+        searchModel = new DefaultListModel<>(); 
         searchHistory = new JList<>(searchModel);
-        searchHistory.addListSelectionListener(new UserSearchHistorySelectionHandler());
+        scrollPane = new JScrollPane(searchHistory);
         initComponents();
     }
     
@@ -51,7 +52,7 @@ public class UserProfileSearchHistory extends JPanel {
      */
     public void addUser(TwitterUser searchedUser) {
         if(searchedUser != null) 
-            searchModel.addElement(searchedUser);
+            searchModel.add(0, searchedUser);
     }
     
     /**
@@ -73,7 +74,8 @@ public class UserProfileSearchHistory extends JPanel {
     
     private void initComponents() {
         searchHistory.setCellRenderer(new UserProfileSearchHistoryListCell());
-        add(searchHistory);
+        searchHistory.addListSelectionListener(new UserSearchHistorySelectionHandler());
+        add(scrollPane);
     }
     
     class UserSearchHistorySelectionHandler implements ListSelectionListener {
