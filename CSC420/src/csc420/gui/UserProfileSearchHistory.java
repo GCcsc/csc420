@@ -62,7 +62,7 @@ public class UserProfileSearchHistory extends JPanel {
      * Removes an entry in the recently searched user profiles.
      * @param index Marker for deleting 
      */
-    public void remove(int index) {
+    public void removeAt(int index) {
         if(index < searchModel.getSize() && index >= 0) {
             searchModel.remove(index);
         }
