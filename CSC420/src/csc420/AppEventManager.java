@@ -68,12 +68,14 @@ public class AppEventManager {
     
     public static void setCurrentUser(TwitterUser user) {
         currentUser = user;
+        searchHistoryPanel.addUser(currentUser);
+        userDetailsPanel.getCurrentUser(currentUser);
     }
     
     public static void apiGetUserByName(String username) {
         try {
             currentUser = twitterApi.getByUsername(username);
-            searchHistoryPanel.addUser(currentUser);
+            setCurrentUser(currentUser);
         } catch(TwitterException e) {
             System.out.println("An error occurred while processing request. \nPlease check your network connection and spelling of username.");
         }
