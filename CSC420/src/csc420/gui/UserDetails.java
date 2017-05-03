@@ -40,6 +40,10 @@ public class UserDetails extends JPanel {
     UserDetails userDetails;
     JPanel UserPhotos;
     JPanel UserInfo;
+    JLabel UserHandle;
+    JLabel UserFollowers;
+    JLabel UserFollowing;
+    JLabel UserSummary;
     
     public UserDetails(){
         UserPhotos = new JPanel();
@@ -68,6 +72,14 @@ public class UserDetails extends JPanel {
     private void initInfo(){
         UserInfo.setOpaque(true);
         UserInfo.setBackground(Color.LIGHT_GRAY);
+        UserHandle = new JLabel("UserHandle");
+        UserFollowers = new JLabel("UserFollowers");
+        UserFollowing = new JLabel("UserFollowing");
+        UserSummary = new JLabel("UserSummary");
+        UserInfo.add(UserHandle);
+        UserInfo.add(UserFollowers);
+        UserInfo.add(UserFollowing);
+        UserInfo.add(UserSummary);
+        UserInfo.setLayout(new BoxLayout(UserInfo, BoxLayout.Y_AXIS));
     }
-    
 }
