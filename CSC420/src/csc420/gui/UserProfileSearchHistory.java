@@ -27,6 +27,9 @@ import csc420.models.TwitterUser;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -37,15 +40,17 @@ public class UserProfileSearchHistory extends JPanel {
     DefaultListModel<TwitterUser> searchModel;
     TwitterUser[] dummyData = {
         new TwitterUser(0, "gradle", 1024, "https://pbs.twimg.com/profile_images/426420605945004032/K85ZWV2F.png"),
-        new TwitterUser(1, "java", 2048, "https://pbs.twimg.com/profile_images/426420605945004032/K85ZWV2F.png")
+        new TwitterUser(1, "java", 2048, "https://pbs.twimg.com/profile_images/426420605945004032/K85ZWV2F.png"),
+        new TwitterUser(2, "scala", 4096, "https://pbs.twimg.com/profile_images/3310435403/dc47c969494d3279783610ba3298f58b.png")
     }; 
     public UserProfileSearchHistory() {
         searchModel = new DefaultListModel<>();
         for(TwitterUser user : dummyData) {
             searchModel.addElement(user);
         }
-        searchHistory = new JList<>(searchModel);
         
+        searchHistory = new JList<>(searchModel);
+        searchHistory.addListSelectionListener(new UserSearchHistorySelectionHandler());
         initComponents();
     }
     
@@ -78,5 +83,14 @@ public class UserProfileSearchHistory extends JPanel {
     private void initComponents() {
         searchHistory.setCellRenderer(new UserProfileSearchHistoryListCell());
         add(searchHistory);
+    }
+    
+    class UserSearchHistorySelectionHandler implements ListSelectionListener {
+
+        @Override
+        public void valueChanged(ListSelectionEvent e) {
+            System.out.println(searchHistory.getSelectedValue());
+        }
+        
     }
 }
