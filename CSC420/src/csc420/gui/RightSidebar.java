@@ -24,7 +24,9 @@
 package csc420.gui;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -56,16 +58,41 @@ public class RightSidebar extends JPanel{
         Dimension dim1 = getPreferredSize();
         dim1.width = 250;
         setPreferredSize(dim1);
-        followers = new JButton("Followers");
-        following = new JButton("Following");
-        retweets = new JButton("Retweets");
-        likes = new JButton("Likes");
-        add(followers);
+        followers = new JButton("Followers"){
+            {
+                setSize(150, 75);
+                setMaximumSize(getSize());
+            }
+        };
+        following = new JButton("Following"){
+            {
+                setSize(150, 75);
+                setMaximumSize(getSize());
+            }
+        };
+        retweets = new JButton("Retweets"){
+            {
+                setSize(150, 75);
+                setMaximumSize(getSize());
+            }
+        };
+        likes = new JButton("Likes"){
+            {
+                setSize(150, 75);
+                setMaximumSize(getSize());
+            }
+        };
+        followers.setAlignmentX(Component.CENTER_ALIGNMENT);
+        following.setAlignmentX(Component.CENTER_ALIGNMENT);
+        retweets.setAlignmentX(Component.CENTER_ALIGNMENT);
+        likes.setAlignmentX(Component.CENTER_ALIGNMENT);
         initButtons();
+        add(followers);
         add(following);
         add(retweets);
         add(likes);
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        followers.setSize(dim1);
+        setLayout(new GridLayout(4,1));
     }
     
     public void initButtons(){

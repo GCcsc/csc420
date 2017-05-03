@@ -38,17 +38,8 @@ import javax.swing.event.ListSelectionListener;
 public class UserProfileSearchHistory extends JPanel {
     JList<TwitterUser> searchHistory;
     DefaultListModel<TwitterUser> searchModel;
-    TwitterUser[] dummyData = {
-        new TwitterUser(0, "gradle", 1024, "https://pbs.twimg.com/profile_images/426420605945004032/K85ZWV2F.png"),
-        new TwitterUser(1, "java", 2048, "https://pbs.twimg.com/profile_images/426420605945004032/K85ZWV2F.png"),
-        new TwitterUser(2, "scala", 4096, "https://pbs.twimg.com/profile_images/3310435403/dc47c969494d3279783610ba3298f58b.png")
-    }; 
     public UserProfileSearchHistory() {
-        searchModel = new DefaultListModel<>();
-        for(TwitterUser user : dummyData) {
-            searchModel.addElement(user);
-        }
-        
+        searchModel = new DefaultListModel<>();        
         searchHistory = new JList<>(searchModel);
         searchHistory.addListSelectionListener(new UserSearchHistorySelectionHandler());
         initComponents();
