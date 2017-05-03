@@ -49,6 +49,32 @@ public class UserProfileSearchHistory extends JPanel {
         initComponents();
     }
     
+    /**
+     * Adds a user to the list of recently searched user profiles.
+     * @param searchedUser User really returned from the Twitter API.
+     */
+    public void addUser(TwitterUser searchedUser) {
+        if(searchedUser != null) 
+            searchModel.addElement(searchedUser);
+    }
+    
+    /**
+     * Removes an entry in the recently searched user profiles.
+     * @param index Marker for deleting 
+     */
+    public void remove(int index) {
+        if(index < searchModel.getSize() && index >= 0) {
+            searchModel.remove(index);
+        }
+    }
+    
+    /**
+     * Clears the list of recently searched users.
+     */
+    public void clear() {
+        searchModel.clear();
+    }
+    
     private void initComponents() {
         searchHistory.setCellRenderer(new UserProfileSearchHistoryListCell());
         add(searchHistory);
