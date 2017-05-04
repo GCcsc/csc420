@@ -28,7 +28,6 @@ import csc420.gui.UserDetails;
 import csc420.gui.UserProfileSearchHistory;
 import csc420.models.TwitterUser;
 import csc420.twitterapi.TwitterAPI;
-import java.util.List;
 import twitter4j.TwitterException;
 
 /**
@@ -51,6 +50,14 @@ public class AppEventManager {
         } catch(TwitterException e) {
             System.out.println("Check your internet connection.");
         }
+    }
+    
+    public static void loadSession() {
+        
+    }
+    
+    public static void saveSession() {
+        
     }
     
     /**

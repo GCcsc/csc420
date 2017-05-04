@@ -56,7 +56,7 @@ public class UserStore implements Iterable<TwitterUser>, Serializable {
      * Expose data entries to be used to populate the graphing library.
      * @return current set of user entries/user followers.
      */
-    public Collection<TwitterUser> getData() {
+    public synchronized Collection<TwitterUser> getData() {
         return store;
     }
     

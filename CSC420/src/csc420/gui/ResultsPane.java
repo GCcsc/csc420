@@ -27,11 +27,14 @@ import csc420.AppEventManager;
 import csc420.models.TwitterUser;
 import edu.uci.ics.jung.algorithms.layout.CircleLayout;
 import edu.uci.ics.jung.algorithms.layout.Layout;
+import edu.uci.ics.jung.algorithms.layout.StaticLayout;
 import edu.uci.ics.jung.graph.DirectedGraph;
 import edu.uci.ics.jung.graph.DirectedSparseGraph;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.UndirectedGraph;
+import edu.uci.ics.jung.graph.UndirectedSparseGraph;
 import edu.uci.ics.jung.graph.UndirectedSparseMultigraph;
+import edu.uci.ics.jung.graph.util.EdgeType;
 import edu.uci.ics.jung.visualization.BasicVisualizationServer;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.control.CrossoverScalingControl;
@@ -44,6 +47,7 @@ import edu.uci.ics.jung.visualization.renderers.Renderer.VertexLabel.Position;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.util.Collection;
+import java.util.Iterator;
 import javax.swing.JPanel;
 
 /**
@@ -56,28 +60,27 @@ public class ResultsPane extends JPanel {
     UndirectedGraph<TwitterUser, String> dg;
     TwitterUser currentUser;
     public ResultsPane(){
-        AppEventManager.setResultsPanel(this);
-        dg = new UndirectedSparseMultigraph<>();
+        dg = new UndirectedSparseGraph<>();
         layout = new CircleLayout(dg);
         vv = new VisualizationViewer<>(layout);
         initComponents();
     }
     
-    public void getData(TwitterUser currentUser, Collection<TwitterUser> twitterUsers) {
-        for(TwitterUser node : dg.getVertices()) {
-            dg.removeVertex(node);
-            System.out.println(dg.getEdgeCount());
-        }
-        
+    public void getData(TwitterUser currentUser, Collection<TwitterUser> twitterUsers) {       
         this.currentUser = currentUser;
-        //dg.addVertex(this.currentUser);
+        
+        dg = new UndirectedSparseGraph<>();
+        layout.setGraph(dg);
+        vv.setGraphLayout(layout);
+        
+        dg.addVertex(this.currentUser);
         
         for(TwitterUser user : twitterUsers) {
             if(user.equals(this.currentUser)) 
                 break;
             dg.addVertex(user);
             dg.addEdge(
-                    user.getId() + " -> " + this.currentUser.getId(),
+                    String.valueOf(user.getId() + " " + user.getFollowersCount()),
                     user,
                     this.currentUser
             );
@@ -85,6 +88,8 @@ public class ResultsPane extends JPanel {
     }
     
     private void initComponents(){
+        AppEventManager.setResultsPanel(this);
+
         setOpaque(true);
         Color twitter = new Color(0,204,255);
         setBackground(twitter);
