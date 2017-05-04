@@ -29,6 +29,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
@@ -100,7 +101,9 @@ public class UserDetails extends JPanel {
         try {
             photo = ImageIO.read(new URL(currentUser.getProfileImageUrl()));
             if(photo != null) {
-                UserPhotos.setIcon(new ImageIcon(photo));
+                Image image = new ImageIcon(photo).getImage(); 
+                UserPhotos.setIcon(new ImageIcon(image.getScaledInstance(400, 400, Image.SCALE_SMOOTH)));
+                
             }
             else {
                 URL defaultPhotoUrl = getClass().getResource("csc420/resources/twitter_logo.png");
