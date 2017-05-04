@@ -29,7 +29,12 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URL;
+import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -39,7 +44,7 @@ import javax.swing.JPanel;
  */
 public class UserDetails extends JPanel {
     TwitterUser currentUser;
-    JPanel UserPhotos;
+    JLabel UserPhotos;
     JPanel UserInfo;
     JLabel UserHandle;
     JLabel UserFollowers;
@@ -47,7 +52,7 @@ public class UserDetails extends JPanel {
     JLabel UserSummary;
     
     public UserDetails(){
-        UserPhotos = new JPanel();
+        UserPhotos = new JLabel();
         UserInfo = new JPanel();
         AppEventManager.setUserDetailsPanel(this);
         initComponents();
@@ -69,6 +74,7 @@ public class UserDetails extends JPanel {
     private void initPhoto(){
         UserPhotos.setOpaque(true);
         UserPhotos.setBackground(Color.DARK_GRAY);
+        UserPhotos.setAlignmentX(RIGHT_ALIGNMENT);
     }
     
     private void initInfo(){
@@ -89,5 +95,20 @@ public class UserDetails extends JPanel {
         this.currentUser = currentUser;        
         UserHandle.setText("Name: " + currentUser.getHandle());
         UserFollowers.setText("Followers: " + currentUser.getFollowersCount());
+        
+        BufferedImage photo;
+        try {
+            photo = ImageIO.read(new URL(currentUser.getProfileImageUrl()));
+            if(photo != null) {
+                UserPhotos.setIcon(new ImageIcon(photo));
+            }
+            else {
+                URL defaultPhotoUrl = getClass().getResource("csc420/resources/twitter_logo.png");
+                photo = ImageIO.read(defaultPhotoUrl);
+                UserPhotos.setIcon(new ImageIcon(photo));
+            }
+        } catch (IOException e) {
+            System.out.println("Bad link provided for profile photo.");
+        }
     }
 }
