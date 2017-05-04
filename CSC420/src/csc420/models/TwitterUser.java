@@ -35,11 +35,13 @@ public class TwitterUser implements Comparable<TwitterUser>, Serializable {
     private long id;
     private int followersCount;
     private String profileImageUrl;
+    private int friendsCount;
     
-    public TwitterUser(long id, String handle, int followersCount, String profileImageUrl) {
+    public TwitterUser(long id, String handle, int followersCount, int friendsCount, String profileImageUrl) {
         this.id = id;
         this.handle = handle;
         this.followersCount = followersCount;
+        this.friendsCount = friendsCount;
         this.profileImageUrl = profileImageUrl;
     }
     
@@ -65,6 +67,13 @@ public class TwitterUser implements Comparable<TwitterUser>, Serializable {
      */
     public int getFollowersCount() {
         return followersCount;
+    }
+    
+    /**
+     * @return Number of friends this user has.
+     */
+    public int getFriendsCount() {
+        return friendsCount;
     }
     
     /**
@@ -106,10 +115,7 @@ public class TwitterUser implements Comparable<TwitterUser>, Serializable {
             return true;
         }
         TwitterUser o = (TwitterUser) other;
-        if(this.id == o.getId()
-                && this.handle.equals(o.getHandle())
-                && this.followersCount == o.getFollowersCount()
-                && this.profileImageUrl.equals(o.getProfileImageUrl())) {
+        if(this.id == o.getId()) {
             return true;
         }
         else {

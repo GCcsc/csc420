@@ -23,7 +23,10 @@
  */
 package csc420.twitterapi;
 import csc420.models.TwitterUser;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+import twitter4j.PagableResponseList;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
@@ -70,6 +73,7 @@ public class TwitterAPI {
                 user.getId(),
                 user.getScreenName(),
                 user.getFollowersCount(),
+                user.getFriendsCount(),
                 user.getProfileImageURL()
         );
     }
@@ -83,11 +87,11 @@ public class TwitterAPI {
      */
     public TwitterUser getByUsername(String username) throws TwitterException {
         User user = twitter.showUser(username);
-        System.out.println("RESPONSE: " + user);
         return new TwitterUser(
                 user.getId(),
                 user.getScreenName(),
                 user.getFollowersCount(),
+                user.getFriendsCount(),
                 user.getProfileImageURL()
         );
     }
@@ -100,9 +104,19 @@ public class TwitterAPI {
      * @return TwitterUser
      * @throws TwitterException 
      */
-    public long[] getFollowersByUserId(long userId, long cursor) throws TwitterException {
-        // Returns 20 of the selected users followers.
-        return twitter.getFollowersIDs(userId, cursor, 20).getIDs();
+    public List<TwitterUser> getFollowersByUserId(long userId, long cursor) throws TwitterException {
+        PagableResponseList<User> results = twitter.getFollowersList(userId, cursor, 50);
+        List<TwitterUser> twitterFollowers = new ArrayList<>();
+        results.stream().map((user) -> new TwitterUser(
+                user.getId(),
+                user.getScreenName(),
+                user.getFollowersCount(),
+                user.getFriendsCount(),
+                user.getBiggerProfileImageURL()
+        )).forEachOrdered((user) -> {
+            twitterFollowers.add(user);
+        });
+        return twitterFollowers;
     }
     
 }
