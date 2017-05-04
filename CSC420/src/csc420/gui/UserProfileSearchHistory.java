@@ -23,8 +23,11 @@
  */
 package csc420.gui;
 
+import csc420.AppEventManager;
 import csc420.models.TwitterUser;
 import java.awt.Dimension;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -77,6 +80,35 @@ public class UserProfileSearchHistory extends JPanel {
         searchHistory.setCellRenderer(new UserProfileSearchHistoryListCell());        
         scrollPane.setMinimumSize(new Dimension(250, 200));
         scrollPane.setPreferredSize(new Dimension(250, 600));
+        
+        searchHistory.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if(e.getClickCount() == 1) {
+                    AppEventManager.apiGetUserByName(searchHistory.getSelectedValue().getHandle());
+                }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
         
         add(scrollPane);
     }
