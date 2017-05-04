@@ -86,11 +86,7 @@ public class TwitterUser implements Comparable<TwitterUser>, Serializable {
     
     @Override
     public String toString() {
-        return String.format("{\"id\": %d%n, \"handle\": \"%s\", \"followers_count\": %d, \"profileImageUrl\": \"%s\"}",
-                id,
-                handle,
-                followersCount,
-                profileImageUrl);
+        return String.format("%d%n: %s", id, handle);
     }
 
     @Override

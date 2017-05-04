@@ -28,6 +28,7 @@ import csc420.gui.UserDetails;
 import csc420.gui.UserProfileSearchHistory;
 import csc420.models.TwitterUser;
 import csc420.twitterapi.TwitterAPI;
+import java.util.List;
 import twitter4j.TwitterException;
 
 /**
@@ -37,6 +38,7 @@ import twitter4j.TwitterException;
 public class AppEventManager {
     private static TwitterAPI twitterApi;
     private static TwitterUser currentUser;
+    private static UserStore userStore;
 
     private static UserProfileSearchHistory searchHistoryPanel;
     private static UserDetails userDetailsPanel;
@@ -45,6 +47,7 @@ public class AppEventManager {
     public AppEventManager() {
         try {
             twitterApi = new TwitterAPI();
+            userStore = new UserStore();
         } catch(TwitterException e) {
             System.out.println("Check your internet connection.");
         }
@@ -73,6 +76,14 @@ public class AppEventManager {
     public static void setResultsPanel(ResultsPane target) {
         resultsPanel = target;
     }
+ /*   
+    public static void setUserStore(UserStore target) {
+        userStore = target;
+    }
+*/    
+    public static void updateResultsPanel() {
+        resultsPanel.getData(currentUser, userStore.getData());
+    }
     
     /**
      * Return the currently focused user account.
@@ -99,6 +110,8 @@ public class AppEventManager {
     public static void apiGetUserByName(String username) {
         try {
             setCurrentUser(twitterApi.getByUsername(username));
+            userStore.update(twitterApi.getFollowersByUserId(currentUser.getId(), -1));
+            resultsPanel.getData(currentUser, userStore.getData());
         } catch(TwitterException e) {
             System.out.println("An error occurred while processing request. \nPlease check your network connection and spelling of username.");
         }

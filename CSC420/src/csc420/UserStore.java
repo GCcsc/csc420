@@ -46,7 +46,7 @@ public class UserStore implements Iterable<TwitterUser>, Serializable {
      * @param followers
      */
     public synchronized void update(Collection<TwitterUser> followers) {
-        clear();
+        store.clear();
         followers.forEach((user) -> {
             store.add(user);
         });
