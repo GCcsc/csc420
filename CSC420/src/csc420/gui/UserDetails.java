@@ -121,5 +121,6 @@ public class UserDetails extends JPanel {
         } catch (IOException e) {
             System.out.println("Bad link provided for profile photo.");
         }
+        UserPhotos.setHorizontalAlignment(JLabel.CENTER);
     }
 }
