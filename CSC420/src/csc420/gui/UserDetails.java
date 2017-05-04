@@ -90,6 +90,11 @@ public class UserDetails extends JPanel {
         UserInfo.add(UserFollowing);
         UserInfo.add(UserSummary);
         UserInfo.setLayout(new BoxLayout(UserInfo, BoxLayout.Y_AXIS));
+        UserHandle.setFont(UserHandle.getFont().deriveFont(20.0f));
+        UserFollowers.setFont(UserFollowers.getFont().deriveFont(20.0f));
+        UserFollowing.setFont(UserFollowing.getFont().deriveFont(20.0f));
+        UserSummary.setFont(UserSummary.getFont().deriveFont(20.0f));
+        
     }
 
     public void getCurrentUser(TwitterUser currentUser) {
