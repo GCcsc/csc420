@@ -101,7 +101,7 @@ public class ResultsPane extends JPanel {
         vv.setPreferredSize(new Dimension(500, 500));
         
         vv.getRenderContext().setVertexLabelTransformer(new ToStringLabeller<>());
-        vv.getRenderContext().setEdgeLabelTransformer(new ToStringLabeller<>());
+        //vv.getRenderContext().setEdgeLabelTransformer(new ToStringLabeller<>());
         
         DefaultModalGraphMouse<TwitterUser, String> gm = new DefaultModalGraphMouse<>();
         gm.setMode(ModalGraphMouse.Mode.TRANSFORMING);
