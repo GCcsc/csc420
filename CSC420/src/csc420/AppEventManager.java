@@ -28,6 +28,11 @@ import csc420.gui.UserDetails;
 import csc420.gui.UserProfileSearchHistory;
 import csc420.models.TwitterUser;
 import csc420.twitterapi.TwitterAPI;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import twitter4j.TwitterException;
 
 /**
@@ -46,18 +51,30 @@ public class AppEventManager {
     public AppEventManager() {
         try {
             twitterApi = new TwitterAPI();
-            userStore = new UserStore();
+            loadSession();
         } catch(TwitterException e) {
             System.out.println("Check your internet connection.");
         }
     }
     
     public static void loadSession() {
-        
+        try {
+            FileInputStream fileStream = new FileInputStream("session.bin");
+            ObjectInputStream oiStream = new ObjectInputStream(fileStream);
+            userStore = (UserStore) oiStream.readObject();
+        } catch(IOException | ClassNotFoundException e) {
+            userStore = new UserStore();
+        }
     }
     
     public static void saveSession() {
-        
+        try {
+            FileOutputStream fileStream = new FileOutputStream("session.bin");
+            ObjectOutputStream ooStream = new ObjectOutputStream(fileStream);
+            ooStream.writeObject(userStore);
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
     }
     
     /**
