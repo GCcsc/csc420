@@ -104,6 +104,8 @@ public class UserDetails extends JPanel {
         this.currentUser = currentUser;        
         UserHandle.setText("Name: " + currentUser.getHandle());
         UserFollowers.setText("Followers: " + currentUser.getFollowersCount());
+        UserFollowing.setText("Following: " + currentUser.getFriendsCount());
+        UserSummary.setText("Following: " + currentUser.getFriendsCount());
         
         BufferedImage photo;
         try {
