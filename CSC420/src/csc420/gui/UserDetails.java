@@ -50,7 +50,6 @@ public class UserDetails extends JPanel {
     JLabel UserHandle;
     JLabel UserFollowers;
     JLabel UserFollowing;
-    JLabel UserSummary;
     
     public UserDetails(){
         UserPhotos = new JLabel();
@@ -84,20 +83,16 @@ public class UserDetails extends JPanel {
         UserHandle = new JLabel("UserHandle");
         UserFollowers = new JLabel("UserFollowers");
         UserFollowing = new JLabel("UserFollowing");
-        UserSummary = new JLabel("UserSummary");
         UserInfo.add(UserHandle);
         UserInfo.add(UserFollowers);
         UserInfo.add(UserFollowing);
-        UserInfo.add(UserSummary);
         UserInfo.setLayout(new BoxLayout(UserInfo, BoxLayout.Y_AXIS));
         UserHandle.setFont(UserHandle.getFont().deriveFont(20.0f));
         UserFollowers.setFont(UserFollowers.getFont().deriveFont(20.0f));
         UserFollowing.setFont(UserFollowing.getFont().deriveFont(20.0f));
-        UserSummary.setFont(UserSummary.getFont().deriveFont(20.0f));
         UserHandle.setForeground(Color.WHITE);
         UserFollowers.setForeground(Color.WHITE);
         UserFollowing.setForeground(Color.WHITE);
-        UserSummary.setForeground(Color.WHITE);
     }
 
     public void getCurrentUser(TwitterUser currentUser) {
@@ -105,7 +100,6 @@ public class UserDetails extends JPanel {
         UserHandle.setText("Name: " + currentUser.getHandle());
         UserFollowers.setText("Followers: " + currentUser.getFollowersCount());
         UserFollowing.setText("Following: " + currentUser.getFriendsCount());
-        UserSummary.setText("Following: " + currentUser.getFriendsCount());
         
         BufferedImage photo;
         try {
