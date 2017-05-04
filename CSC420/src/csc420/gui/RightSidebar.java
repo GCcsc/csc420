@@ -23,6 +23,7 @@
  */
 package csc420.gui;
 
+import csc420.AppEventManager;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -115,6 +116,8 @@ public class RightSidebar extends JPanel{
             @Override
             public void actionPerformed(ActionEvent e){
                 System.out.println("likes button was pressed!");
+                AppEventManager.resetSession();
+                AppEventManager.updateResultsPanel();
             }
         });
     }
