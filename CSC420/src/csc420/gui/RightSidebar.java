@@ -72,7 +72,7 @@ public class RightSidebar extends JPanel{
                 setMaximumSize(getSize());
             }
         };
-        refresh = new JButton("Likes"){
+        refresh = new JButton("Refresh"){
             {
                 setSize(100, 50);
                 setMaximumSize(getSize());
