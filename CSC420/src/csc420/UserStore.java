@@ -25,6 +25,7 @@ package csc420;
 
 import csc420.models.TwitterUser;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
@@ -41,11 +42,22 @@ public class UserStore implements Iterable<TwitterUser>, Serializable {
     }
     
     /**
-     * Add a user to the store.
-     * @param twitterUser 
+     * Clear the store and accept a new collection of TwitterUsers
+     * @param followers
      */
-    public synchronized void add(TwitterUser twitterUser){
-        store.add(twitterUser);
+    public synchronized void update(Collection<TwitterUser> followers) {
+        clear();
+        followers.forEach((user) -> {
+            store.add(user);
+        });
+    }
+    
+    /**
+     * Expose data entries to be used to populate the graphing library.
+     * @return current set of user entries/user followers.
+     */
+    public Collection<TwitterUser> getData() {
+        return store;
     }
     
     /**
@@ -55,38 +67,7 @@ public class UserStore implements Iterable<TwitterUser>, Serializable {
     public int getSize(){
         return store.size();
     }
-    
-    /**
-     * Find a user in the store by the profile id. Returns null if it is not
-     * found within the store.
-     * @param userId
-     * @return TwitterUser on success or null otherwise.
-     */
-    public TwitterUser find(long userId){
-        for(TwitterUser user : store) {
-            if(user.getId() == userId) {
-                return user;
-            }
-        }
-        return null;
-    }
-    
-    /**
-     * Remove a user from the store by the profile id. Returns true if a user
-     * was deleted from the store or false otherwise.
-     * @param userId
-     * @return 
-     */
-    public synchronized boolean remove(int userId){
-        for (TwitterUser user : store){
-            if(user.getId() == userId){
-                store.remove(user);
-                return true;
-            }
-        }
-        return false;
-    }
-    
+
     /**
      * Empties out the twitter user profiles currently in the store.
      */
