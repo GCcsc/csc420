@@ -41,7 +41,7 @@ public class RightSidebar extends JPanel{
     JButton followers;
     JButton following;
     JButton retweets;
-    JButton likes;
+    JButton refresh;
     
     public RightSidebar(){
         initComponents();
@@ -72,7 +72,7 @@ public class RightSidebar extends JPanel{
                 setMaximumSize(getSize());
             }
         };
-        likes = new JButton("Likes"){
+        refresh = new JButton("Likes"){
             {
                 setSize(100, 50);
                 setMaximumSize(getSize());
@@ -81,13 +81,13 @@ public class RightSidebar extends JPanel{
         followers.setAlignmentX(Component.CENTER_ALIGNMENT);
         following.setAlignmentX(Component.CENTER_ALIGNMENT);
         retweets.setAlignmentX(Component.CENTER_ALIGNMENT);
-        likes.setAlignmentX(Component.CENTER_ALIGNMENT);
+        refresh.setAlignmentX(Component.CENTER_ALIGNMENT);
         setBackground(twitter);
         initButtons();
         add(followers);
         add(following);
         add(retweets);
-        add(likes);
+        add(refresh);
         followers.setSize(dim1);
         setLayout(new GridLayout(4,1));
     }
@@ -111,7 +111,7 @@ public class RightSidebar extends JPanel{
                 System.out.println("retweets button was pressed!");
             }
         });
-        likes.addActionListener(new ActionListener(){
+        refresh.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
                 System.out.println("likes button was pressed!");
