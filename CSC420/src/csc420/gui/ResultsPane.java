@@ -33,8 +33,13 @@ import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.UndirectedGraph;
 import edu.uci.ics.jung.graph.UndirectedSparseMultigraph;
 import edu.uci.ics.jung.visualization.BasicVisualizationServer;
+import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.control.CrossoverScalingControl;
+import edu.uci.ics.jung.visualization.control.DefaultModalGraphMouse;
+import edu.uci.ics.jung.visualization.control.ModalGraphMouse;
 import edu.uci.ics.jung.visualization.control.ScalingControl;
+import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
+import edu.uci.ics.jung.visualization.renderers.DefaultVertexLabelRenderer;
 import edu.uci.ics.jung.visualization.renderers.Renderer.VertexLabel.Position;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -46,7 +51,7 @@ import javax.swing.JPanel;
  * @author chasetoy
  */
 public class ResultsPane extends JPanel {
-    BasicVisualizationServer<TwitterUser, String> vv;
+    VisualizationViewer<TwitterUser, String> vv;
     Layout<TwitterUser, String> layout;
     UndirectedGraph<TwitterUser, String> dg;
     TwitterUser currentUser;
@@ -54,7 +59,7 @@ public class ResultsPane extends JPanel {
         AppEventManager.setResultsPanel(this);
         dg = new UndirectedSparseMultigraph<>();
         layout = new CircleLayout(dg);
-        vv = new BasicVisualizationServer<>(layout);
+        vv = new VisualizationViewer<>(layout);
         initComponents();
     }
     
@@ -65,7 +70,7 @@ public class ResultsPane extends JPanel {
         }
         
         this.currentUser = currentUser;
-        dg.addVertex(this.currentUser);
+        //dg.addVertex(this.currentUser);
         
         for(TwitterUser user : twitterUsers) {
             if(user.equals(this.currentUser)) 
@@ -76,10 +81,7 @@ public class ResultsPane extends JPanel {
                     user,
                     this.currentUser
             );
-        }
-        
-        System.out.println(dg.toString());
-        
+        }        
     }
     
     private void initComponents(){
@@ -92,8 +94,16 @@ public class ResultsPane extends JPanel {
         
         layout.setSize(new Dimension(450, 450));
         vv.setPreferredSize(new Dimension(500, 500));
+        vv.getRenderContext().setVertexLabelTransformer(new ToStringLabeller<>());
+        vv.getRenderContext().setEdgeLabelTransformer(new ToStringLabeller<>());
+        
+        DefaultModalGraphMouse<TwitterUser, String> gm = new DefaultModalGraphMouse<>();
+        gm.setMode(ModalGraphMouse.Mode.TRANSFORMING);
+        vv.setGraphMouse(gm);
+        
         ScalingControl scaling = new CrossoverScalingControl();
-        scaling.scale(vv, 1 / 1.1f, vv.getCenter());
+        scaling.scale(vv, CENTER_ALIGNMENT, vv.getCenter());
+
         add(vv);
     }
 }
