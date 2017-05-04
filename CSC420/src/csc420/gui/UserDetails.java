@@ -107,7 +107,7 @@ public class UserDetails extends JPanel {
             photo = ImageIO.read(new URL(currentUser.getProfileImageUrl()));
             if(photo != null) {
                 Image image = new ImageIcon(photo).getImage(); 
-                UserPhotos.setIcon(new ImageIcon(image.getScaledInstance(400, 400, Image.SCALE_SMOOTH)));
+                UserPhotos.setIcon(new ImageIcon(image.getScaledInstance(150, 150, Image.SCALE_DEFAULT)));
                 
             }
             else {
