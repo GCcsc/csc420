@@ -115,7 +115,6 @@ public class RightSidebar extends JPanel{
         refresh.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                System.out.println("likes button was pressed!");
                 AppEventManager.resetSession();
                 AppEventManager.updateResultsPanel();
             }

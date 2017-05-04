@@ -34,6 +34,7 @@ import edu.uci.ics.jung.graph.util.EdgeType;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.control.CrossoverScalingControl;
 import edu.uci.ics.jung.visualization.control.DefaultModalGraphMouse;
+import edu.uci.ics.jung.visualization.control.GraphMouseListener;
 import edu.uci.ics.jung.visualization.control.ModalGraphMouse;
 import edu.uci.ics.jung.visualization.control.ScalingControl;
 import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
@@ -42,6 +43,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.MouseEvent;
 import java.util.Collection;
 import javax.swing.JPanel;
 
@@ -114,7 +116,23 @@ public class ResultsPane extends JPanel {
         gm.setMode(ModalGraphMouse.Mode.TRANSFORMING);
         vv.setGraphMouse(gm);
         
+        vv.addGraphMouseListener(new GraphMouseListener<TwitterUser>() {
+            @Override
+            public void graphClicked(TwitterUser v, MouseEvent me) {
+                AppEventManager.apiGetUserByName(v.getHandle());
+            }
+
+            @Override
+            public void graphPressed(TwitterUser v, MouseEvent me) {
+            }
+
+            @Override
+            public void graphReleased(TwitterUser v, MouseEvent me) {
+            }
+        });
+        
         pickedState = vv.getPickedVertexState();
+        
         pickedState.addItemListener((ItemEvent e) -> {
             System.out.println("Wait....what was that!?");
             Object object = e.getItem();
