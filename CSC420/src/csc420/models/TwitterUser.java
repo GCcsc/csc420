@@ -86,7 +86,7 @@ public class TwitterUser implements Comparable<TwitterUser>, Serializable {
     
     @Override
     public String toString() {
-        return String.format("%d%n: %s", id, handle);
+        return String.format("@%s", handle);
     }
 
     @Override

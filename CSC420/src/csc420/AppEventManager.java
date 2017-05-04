@@ -77,7 +77,6 @@ public class AppEventManager {
             FileOutputStream fileStream = new FileOutputStream("src/resources/session.bin");
             ObjectOutputStream ooStream = new ObjectOutputStream(fileStream);
             ooStream.writeObject(userStore);
-            System.out.println("Okay");
         } catch(IOException e) {
             e.printStackTrace();
         }
@@ -106,11 +105,7 @@ public class AppEventManager {
     public static void setResultsPanel(ResultsPane target) {
         resultsPanel = target;
     }
- /*   
-    public static void setUserStore(UserStore target) {
-        userStore = target;
-    }
-*/    
+
     public static void updateResultsPanel() {
         resultsPanel.getData(currentUser, userStore.getData());
     }

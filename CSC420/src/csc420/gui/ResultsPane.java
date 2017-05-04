@@ -26,28 +26,20 @@ package csc420.gui;
 import csc420.AppEventManager;
 import csc420.models.TwitterUser;
 import edu.uci.ics.jung.algorithms.layout.CircleLayout;
+import edu.uci.ics.jung.algorithms.layout.FRLayout;
 import edu.uci.ics.jung.algorithms.layout.Layout;
-import edu.uci.ics.jung.algorithms.layout.StaticLayout;
-import edu.uci.ics.jung.graph.DirectedGraph;
 import edu.uci.ics.jung.graph.DirectedSparseGraph;
 import edu.uci.ics.jung.graph.Graph;
-import edu.uci.ics.jung.graph.UndirectedGraph;
-import edu.uci.ics.jung.graph.UndirectedSparseGraph;
-import edu.uci.ics.jung.graph.UndirectedSparseMultigraph;
 import edu.uci.ics.jung.graph.util.EdgeType;
-import edu.uci.ics.jung.visualization.BasicVisualizationServer;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.control.CrossoverScalingControl;
 import edu.uci.ics.jung.visualization.control.DefaultModalGraphMouse;
 import edu.uci.ics.jung.visualization.control.ModalGraphMouse;
 import edu.uci.ics.jung.visualization.control.ScalingControl;
 import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
-import edu.uci.ics.jung.visualization.renderers.DefaultVertexLabelRenderer;
-import edu.uci.ics.jung.visualization.renderers.Renderer.VertexLabel.Position;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.util.Collection;
-import java.util.Iterator;
 import javax.swing.JPanel;
 
 /**
@@ -57,19 +49,23 @@ import javax.swing.JPanel;
 public class ResultsPane extends JPanel {
     VisualizationViewer<TwitterUser, String> vv;
     Layout<TwitterUser, String> layout;
-    UndirectedGraph<TwitterUser, String> dg;
+    DirectedSparseGraph<TwitterUser, String> dg;
+    
     TwitterUser currentUser;
-    public ResultsPane(){
-        dg = new UndirectedSparseGraph<>();
-        layout = new CircleLayout(dg);
+    public ResultsPane() {
+
+        dg = new DirectedSparseGraph<>();
+        layout = new FRLayout<>(dg);
         vv = new VisualizationViewer<>(layout);
         initComponents();
+
     }
     
-    public void getData(TwitterUser currentUser, Collection<TwitterUser> twitterUsers) {       
+    public void getData(TwitterUser currentUser, Collection<TwitterUser> twitterUsers) {
+
         this.currentUser = currentUser;
         
-        dg = new UndirectedSparseGraph<>();
+        dg = new DirectedSparseGraph<>();
         layout.setGraph(dg);
         vv.setGraphLayout(layout);
         
@@ -79,12 +75,16 @@ public class ResultsPane extends JPanel {
             if(user.equals(this.currentUser)) 
                 break;
             dg.addVertex(user);
+
             dg.addEdge(
-                    String.valueOf(user.getId() + " " + user.getFollowersCount()),
+                    String.valueOf(user.getId()),
                     user,
-                    this.currentUser
+                    this.currentUser,
+                    EdgeType.DIRECTED
             );
-        }        
+
+        }
+
     }
     
     private void initComponents(){
@@ -94,11 +94,12 @@ public class ResultsPane extends JPanel {
         Color twitter = new Color(0,204,255);
         setBackground(twitter);
         Dimension dim1 = getPreferredSize();
-        dim1.width = 250;
+        dim1.width = 500;
         setPreferredSize(dim1);
         
-        layout.setSize(new Dimension(450, 450));
+        layout.setSize(new Dimension(500, 500));
         vv.setPreferredSize(new Dimension(500, 500));
+        
         vv.getRenderContext().setVertexLabelTransformer(new ToStringLabeller<>());
         vv.getRenderContext().setEdgeLabelTransformer(new ToStringLabeller<>());
         
@@ -108,7 +109,8 @@ public class ResultsPane extends JPanel {
         
         ScalingControl scaling = new CrossoverScalingControl();
         scaling.scale(vv, CENTER_ALIGNMENT, vv.getCenter());
-
+        layout.initialize();
         add(vv);
     }
+
 }
