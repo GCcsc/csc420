@@ -74,21 +74,11 @@ public class UserProfileSearchHistory extends JPanel {
     }
     
     private void initComponents() {
-        searchHistory.setCellRenderer(new UserProfileSearchHistoryListCell());
-        searchHistory.addListSelectionListener(new UserSearchHistorySelectionHandler());
-        
+        searchHistory.setCellRenderer(new UserProfileSearchHistoryListCell());        
         scrollPane.setMinimumSize(new Dimension(250, 200));
         scrollPane.setPreferredSize(new Dimension(250, 600));
         
         add(scrollPane);
     }
     
-    class UserSearchHistorySelectionHandler implements ListSelectionListener {
-
-        @Override
-        public void valueChanged(ListSelectionEvent e) {
-            System.out.println(searchHistory.getSelectedValue());
-        }
-        
-    }
 }
