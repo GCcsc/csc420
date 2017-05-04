@@ -37,8 +37,11 @@ import edu.uci.ics.jung.visualization.control.DefaultModalGraphMouse;
 import edu.uci.ics.jung.visualization.control.ModalGraphMouse;
 import edu.uci.ics.jung.visualization.control.ScalingControl;
 import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
+import edu.uci.ics.jung.visualization.picking.PickedState;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.Collection;
 import javax.swing.JPanel;
 
@@ -50,6 +53,7 @@ public class ResultsPane extends JPanel {
     VisualizationViewer<TwitterUser, String> vv;
     Layout<TwitterUser, String> layout;
     DirectedSparseGraph<TwitterUser, String> dg;
+    PickedState<TwitterUser> pickedState ;
     
     TwitterUser currentUser;
     public ResultsPane() {
@@ -57,6 +61,7 @@ public class ResultsPane extends JPanel {
         dg = new DirectedSparseGraph<>();
         layout = new FRLayout<>(dg);
         vv = new VisualizationViewer<>(layout);
+        
         initComponents();
 
     }
@@ -89,6 +94,8 @@ public class ResultsPane extends JPanel {
     
     private void initComponents(){
         AppEventManager.setResultsPanel(this);
+        
+        
 
         setOpaque(true);
         Color twitter = new Color(0,204,255);
@@ -106,6 +113,20 @@ public class ResultsPane extends JPanel {
         DefaultModalGraphMouse<TwitterUser, String> gm = new DefaultModalGraphMouse<>();
         gm.setMode(ModalGraphMouse.Mode.TRANSFORMING);
         vv.setGraphMouse(gm);
+        
+        pickedState = vv.getPickedVertexState();
+        pickedState.addItemListener((ItemEvent e) -> {
+            System.out.println("Wait....what was that!?");
+            Object object = e.getItem();
+            if(object instanceof TwitterUser) {
+                System.out.println("Oh okay! Well let's give it a look!");
+                TwitterUser user = (TwitterUser) object;
+                if(pickedState.isPicked(user)) {
+                    System.out.println(user);
+                    AppEventManager.apiGetUserByName(user.getHandle());
+                }
+            }
+        });
         
         ScalingControl scaling = new CrossoverScalingControl();
         scaling.scale(vv, CENTER_ALIGNMENT, vv.getCenter());

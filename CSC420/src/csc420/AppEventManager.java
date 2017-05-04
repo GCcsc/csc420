@@ -72,6 +72,10 @@ public class AppEventManager {
         }
     }
     
+    public static void resetSession() {
+        userStore = new UserStore();
+    }
+    
     public static void saveSession() {
         try {
             FileOutputStream fileStream = new FileOutputStream("src/resources/session.bin");
