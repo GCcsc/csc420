@@ -23,6 +23,8 @@
  */
 package csc420.gui;
 
+import csc420.AppEventManager;
+import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
@@ -38,10 +40,13 @@ public class LeftSidebar extends JPanel {
     public LeftSidebar() {
         this.userSearchBar = new UserSearchBar();
         this.userSearchHistory = new UserProfileSearchHistory();
+        AppEventManager.setSearchHistoryPanel(userSearchHistory);
         initComponents();
     }
     
     private void initComponents() {
+        Color twitter = new Color(0,132,180);
+        setBackground(twitter);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setOpaque(true);
         Dimension dim = getPreferredSize();

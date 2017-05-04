@@ -24,8 +24,13 @@
 package csc420.gui;
 
 import csc420.models.TwitterUser;
+import java.awt.Dimension;
+import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -33,19 +38,57 @@ import javax.swing.JPanel;
  */
 public class UserProfileSearchHistory extends JPanel {
     JList<TwitterUser> searchHistory;
-    
-    TwitterUser[] dummyData = {
-        new TwitterUser(0, "gradle", 1024, "https://pbs.twimg.com/profile_images/426420605945004032/K85ZWV2F.png"),
-        new TwitterUser(1, "java", 2048, "https://pbs.twimg.com/profile_images/426420605945004032/K85ZWV2F.png")
-    }; 
+    JScrollPane scrollPane;
+    DefaultListModel<TwitterUser> searchModel;
     public UserProfileSearchHistory() {
-        searchHistory = new JList<>(dummyData);
-        
+        searchModel = new DefaultListModel<>(); 
+        searchHistory = new JList<>(searchModel);
+        scrollPane = new JScrollPane(searchHistory, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         initComponents();
+    }
+    
+    /**
+     * Adds a user to the list of recently searched user profiles.
+     * @param searchedUser User really returned from the Twitter API.
+     */
+    public void addUser(TwitterUser searchedUser) {
+        if(searchedUser != null) 
+            searchModel.add(0, searchedUser);
+    }
+    
+    /**
+     * Removes an entry in the recently searched user profiles.
+     * @param index Marker for deleting 
+     */
+    public void removeAt(int index) {
+        if(index < searchModel.getSize() && index >= 0) {
+            searchModel.remove(index);
+        }
+    }
+    
+    /**
+     * Clears the list of recently searched users.
+     */
+    public void clear() {
+        searchModel.clear();
     }
     
     private void initComponents() {
         searchHistory.setCellRenderer(new UserProfileSearchHistoryListCell());
-        add(searchHistory);
+        searchHistory.addListSelectionListener(new UserSearchHistorySelectionHandler());
+        
+        scrollPane.setMinimumSize(new Dimension(250, 200));
+        scrollPane.setPreferredSize(new Dimension(250, 600));
+        
+        add(scrollPane);
+    }
+    
+    class UserSearchHistorySelectionHandler implements ListSelectionListener {
+
+        @Override
+        public void valueChanged(ListSelectionEvent e) {
+            System.out.println(searchHistory.getSelectedValue());
+        }
+        
     }
 }

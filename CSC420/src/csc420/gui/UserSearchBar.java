@@ -23,6 +23,8 @@
  */
 package csc420.gui;
 
+import csc420.AppEventManager;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -38,10 +40,9 @@ import javax.swing.JTextField;
 public class UserSearchBar extends JPanel {
     JLabel fieldLabel;
     JTextField userTextField;
-    
     public UserSearchBar() {
         fieldLabel = new JLabel("User: ");
-        userTextField = new JTextField();        
+        userTextField = new JTextField();
         initComponents();
     }
     
@@ -52,6 +53,10 @@ public class UserSearchBar extends JPanel {
         
         add(fieldLabel);
         add(userTextField);
+        
+        Color twitter = new Color(0,132,180);
+        setBackground(twitter);
+        fieldLabel.setBackground(twitter);
     }
     
     private void initializeUserTextField() {
@@ -60,8 +65,10 @@ public class UserSearchBar extends JPanel {
             @Override
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    System.out.print("Firing off search for Twitter user profile: ");
-                    System.out.println(userTextField.getText());
+                    userTextField.setEnabled(false);
+                    AppEventManager.apiGetUserByName(userTextField.getText());
+                    userTextField.setText("");
+                    userTextField.setEnabled(true);
                 }
             }
         });

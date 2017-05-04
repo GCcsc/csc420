@@ -23,32 +23,71 @@
  */
 package csc420.gui;
 
+import csc420.AppEventManager;
+import csc420.models.TwitterUser;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.GridLayout;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 /**
  *
  * @author chasetoy
  */
 public class UserDetails extends JPanel {
-    UserDetails userDetails;
+    TwitterUser currentUser;
+    JPanel UserPhotos;
+    JPanel UserInfo;
+    JLabel UserHandle;
+    JLabel UserFollowers;
+    JLabel UserFollowing;
+    JLabel UserSummary;
     
     public UserDetails(){
+        UserPhotos = new JPanel();
+        UserInfo = new JPanel();
+        AppEventManager.setUserDetailsPanel(this);
         initComponents();
     }
     
     private void initComponents(){
         setOpaque(true);
+        setLayout(new GridLayout(1,2));
         setBackground(Color.orange);
         Dimension dim1 = getPreferredSize();
-        dim1.width = 250;
-        setPreferredSize(dim1);
+        dim1.width = 720;
+        setMinimumSize(dim1);
+        initPhoto();
+        initInfo();
+        add(UserPhotos);
+        add(UserInfo);
     }
     
+    private void initPhoto(){
+        UserPhotos.setOpaque(true);
+        UserPhotos.setBackground(Color.DARK_GRAY);
+    }
+    
+    private void initInfo(){
+        UserInfo.setOpaque(true);
+        UserInfo.setBackground(Color.DARK_GRAY);
+        UserHandle = new JLabel("UserHandle");
+        UserFollowers = new JLabel("UserFollowers");
+        UserFollowing = new JLabel("UserFollowing");
+        UserSummary = new JLabel("UserSummary");
+        UserInfo.add(UserHandle);
+        UserInfo.add(UserFollowers);
+        UserInfo.add(UserFollowing);
+        UserInfo.add(UserSummary);
+        UserInfo.setLayout(new BoxLayout(UserInfo, BoxLayout.Y_AXIS));
+    }
+
+    public void getCurrentUser(TwitterUser currentUser) {
+        this.currentUser = currentUser;        
+        UserHandle.setText("Name: " + currentUser.getHandle());
+        UserFollowers.setText("Followers: " + currentUser.getFollowersCount());
+    }
 }

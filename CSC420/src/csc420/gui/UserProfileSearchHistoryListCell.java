@@ -24,12 +24,13 @@
 package csc420.gui;
 
 import csc420.models.TwitterUser;
-import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Font;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -45,22 +46,14 @@ public class UserProfileSearchHistoryListCell extends JPanel implements ListCell
     JLabel userProfileName;
     JLabel userFollowersCount;
     JPanel userInfoBox;
+    JLabel userProfilePhoto;
     
     public UserProfileSearchHistoryListCell() {
         userProfileName = new JLabel();
         userFollowersCount = new JLabel();
         userInfoBox = new JPanel();
-    }
-    
-    /**
-     * Return the user's main profile image to be displayed as a thumbnail in the
-     * searched users history list.
-     * @param twitterProfilePhoto Image to be passed into search history entry.
-     * @return (ImageIcon|null) ImageIcon used to represent a profile photo.
-     */
-    public ImageIcon loadProfileImage(ImageIcon twitterProfilePhoto) {
-        // TODO: If null return another default image.
-        return twitterProfilePhoto;
+        userProfilePhoto = new JLabel();
+        
     }
     
     @Override
@@ -72,20 +65,39 @@ public class UserProfileSearchHistoryListCell extends JPanel implements ListCell
             boolean cellHasFocus) {
         
         setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+        setAlignmentX(LEFT_ALIGNMENT);
+        userInfoBox.setLayout(new BoxLayout(userInfoBox, BoxLayout.Y_AXIS));
+
         
         Font listFont = list.getFont();
         userProfileName.setFont(listFont);
         userFollowersCount.setFont(listFont);
         
-        userProfileName.setText(user.getHandle());
-        userFollowersCount.setText(String.valueOf(user.getFollowersCount()));
+        BufferedImage photo;
+        try {
+            photo = ImageIO.read(new URL(user.getProfileImageUrl()));
+            if(photo != null) {
+                userProfilePhoto.setIcon(new ImageIcon(photo));
+            }
+            else {
+                URL defaultPhotoUrl = getClass().getResource("csc420/resources/twitter_logo.png");
+                photo = ImageIO.read(defaultPhotoUrl);
+                userProfilePhoto.setIcon(new ImageIcon(photo));
+            }
+        } catch (IOException e) {
+            System.out.println("Bad link provided for profile photo.");
+        }
         
-        userInfoBox.add(userProfileName, BorderLayout.NORTH);
-        userInfoBox.add(userFollowersCount, BorderLayout.SOUTH);
+        userProfileName.setText("@" + user.getHandle());
+        userFollowersCount.setText("Followers: " + String.valueOf(user.getFollowersCount()));
+        
+        userInfoBox.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
+        
+        add(userProfilePhoto);
+        userInfoBox.add(userProfileName);
+        userInfoBox.add(userFollowersCount);
         add(userInfoBox);
-        
         return this;
-        
     }
     
 }

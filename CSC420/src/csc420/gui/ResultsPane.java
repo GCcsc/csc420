@@ -25,12 +25,7 @@ package csc420.gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 /**
  *
@@ -45,7 +40,8 @@ public class ResultsPane extends JPanel {
     
     private void initComponents(){
         setOpaque(true);
-        setBackground(Color.YELLOW);
+        Color twitter = new Color(0,204,255);
+        setBackground(twitter);
         Dimension dim1 = getPreferredSize();
         dim1.width = 250;
         setPreferredSize(dim1);

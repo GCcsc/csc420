@@ -24,14 +24,13 @@
 package csc420.gui;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import javax.swing.BoxLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 /**
  *
@@ -50,18 +49,73 @@ public class RightSidebar extends JPanel{
     
     private void initComponents(){
         setOpaque(true);
-        setBackground(Color.RED);
+        Color twitter = new Color(0,132,180);
+        setBackground(twitter);
         Dimension dim1 = getPreferredSize();
         dim1.width = 250;
         setPreferredSize(dim1);
-        followers = new JButton("Followers");
-        following = new JButton("Following");
-        retweets = new JButton("Retweets");
-        likes = new JButton("Likes");
+        followers = new JButton("Followers"){
+            {
+                setSize(100, 50);
+                setMaximumSize(getSize());
+            }
+        };
+        following = new JButton("Following"){
+            {
+                setSize(100, 50);
+                setMaximumSize(getSize());
+            }
+        };
+        retweets = new JButton("Retweets"){
+            {
+                setSize(100, 50);
+                setMaximumSize(getSize());
+            }
+        };
+        likes = new JButton("Likes"){
+            {
+                setSize(100, 50);
+                setMaximumSize(getSize());
+            }
+        };
+        followers.setAlignmentX(Component.CENTER_ALIGNMENT);
+        following.setAlignmentX(Component.CENTER_ALIGNMENT);
+        retweets.setAlignmentX(Component.CENTER_ALIGNMENT);
+        likes.setAlignmentX(Component.CENTER_ALIGNMENT);
+        setBackground(twitter);
+        initButtons();
         add(followers);
         add(following);
         add(retweets);
         add(likes);
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        followers.setSize(dim1);
+        setLayout(new GridLayout(4,1));
+    }
+    
+    public void initButtons(){
+        followers.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                System.out.println("followers button was pressed!");
+            } 
+        });
+        following.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                System.out.println("following button was pressed!");
+            }
+        });
+        retweets.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                System.out.println("retweets button was pressed!");
+            }
+        });
+        likes.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                System.out.println("likes button was pressed!");
+            }
+        });
     }
 }
