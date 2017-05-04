@@ -59,19 +59,25 @@ public class AppEventManager {
     
     public static void loadSession() {
         try {
-            FileInputStream fileStream = new FileInputStream("session.bin");
+            FileInputStream fileStream = new FileInputStream("src/resources/session.bin");
             ObjectInputStream oiStream = new ObjectInputStream(fileStream);
-            userStore = (UserStore) oiStream.readObject();
-        } catch(IOException | ClassNotFoundException e) {
+            userStore = (UserStore) oiStream.readObject();            
+            setCurrentUser(userStore.getCurrentUser());
+            updateResultsPanel();
+            
+            
+        } catch(Exception e) {
+            e.printStackTrace();
             userStore = new UserStore();
         }
     }
     
     public static void saveSession() {
         try {
-            FileOutputStream fileStream = new FileOutputStream("session.bin");
+            FileOutputStream fileStream = new FileOutputStream("src/resources/session.bin");
             ObjectOutputStream ooStream = new ObjectOutputStream(fileStream);
             ooStream.writeObject(userStore);
+            System.out.println("Okay");
         } catch(IOException e) {
             e.printStackTrace();
         }
@@ -122,9 +128,12 @@ public class AppEventManager {
      * @param user 
      */
     public static void setCurrentUser(TwitterUser user) {
-        currentUser = user;
-        searchHistoryPanel.addUser(currentUser);
-        userDetailsPanel.getCurrentUser(currentUser);
+        if(searchHistoryPanel != null && userDetailsPanel != null) {
+            currentUser = user;
+
+            searchHistoryPanel.addUser(currentUser);
+            userDetailsPanel.getCurrentUser(currentUser);
+        }
     }
     
     /**
@@ -134,7 +143,7 @@ public class AppEventManager {
     public static void apiGetUserByName(String username) {
         try {
             setCurrentUser(twitterApi.getByUsername(username));
-            userStore.update(twitterApi.getFollowersByUserId(currentUser.getId(), -1));
+            userStore.update(currentUser, twitterApi.getFollowersByUserId(currentUser.getId(), -1));
             resultsPanel.getData(currentUser, userStore.getData());
         } catch(TwitterException e) {
             System.out.println("An error occurred while processing request. \nPlease check your network connection and spelling of username.");
