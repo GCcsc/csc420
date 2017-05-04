@@ -25,6 +25,8 @@ package csc420.gui;
 
 import csc420.AppEventManager;
 import java.awt.BorderLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 
 /**
@@ -40,10 +42,18 @@ public class RootFrame extends JFrame {
     public RootFrame(String title) {
         super(title);
         AppEventManager.setResultsPanel(resultsPane);
+        
         initComponents();
     }
     
     private void initComponents() {
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent windowEvent) {
+                AppEventManager.saveSession();
+                System.exit(0);
+            }
+        });
         setLayout(new BorderLayout());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setBounds(10,10,960,720);
@@ -51,5 +61,6 @@ public class RootFrame extends JFrame {
         this.add(rightSideBar, BorderLayout.EAST);
         this.add(resultsPane, BorderLayout.CENTER);
         this.add(userDetails, BorderLayout.SOUTH);
+        AppEventManager eventManager = new AppEventManager();
     }
 }

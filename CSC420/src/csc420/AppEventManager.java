@@ -67,7 +67,7 @@ public class AppEventManager {
             
             
         } catch(Exception e) {
-            e.printStackTrace();
+            // Just start a new session otherwise.
             userStore = new UserStore();
         }
     }

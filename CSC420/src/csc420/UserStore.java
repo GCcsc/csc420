@@ -37,16 +37,19 @@ import java.util.TreeSet;
  */
 public class UserStore implements Iterable<TwitterUser>, Serializable {
     private final Set<TwitterUser> store;
+    private TwitterUser currentUser;
     public UserStore() {
        store = new TreeSet<>();
     }
     
     /**
      * Clear the store and accept a new collection of TwitterUsers
+     * @param currentUser
      * @param followers
      */
-    public synchronized void update(Collection<TwitterUser> followers) {
+    public synchronized void update(TwitterUser currentUser, Collection<TwitterUser> followers) {
         store.clear();
+        this.currentUser = currentUser;
         followers.forEach((user) -> {
             store.add(user);
         });
@@ -58,6 +61,10 @@ public class UserStore implements Iterable<TwitterUser>, Serializable {
      */
     public synchronized Collection<TwitterUser> getData() {
         return store;
+    }
+    
+    public synchronized TwitterUser getCurrentUser() {
+        return currentUser;
     }
     
     /**
